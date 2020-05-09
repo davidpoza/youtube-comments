@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
 import { videoUrlIsValid } from '../helpers/utils';
+import config from '../../config';
+import fetchMock from '../mocks/api';
+import Store from '../../reducers/store';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,8 +19,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function SearchFrom() {
+  const [state, dispatch] = useContext(Store);
   const [videoUrl, setVideoUrl] = useState('');
+  const makeRequest = useCallback(() => {
+    const q = [
+      config.apiBaseUrl,
+      'part=replies,snippet',
+      `&videoId=xxxx`,
+      `&textFormat=xxxx`,
+      `&maxResults=100`,
+      `&searchTerms=xxxx`, // TODO: encode
+    ].join('');
+    console.log('request lanzada: ', q);
+    console.log('estado: ', state);
+    dispatch({ type: 'ADD_URL', payload: { id: 'xxxx', date: '10/05/2020 12:29', content: 'hola' } });
+    return (fetchMock);
+  }, [state, dispatch]);
   const classes = useStyles();
+
   return (
     <Grid item xs={10} md={6}>
       <form className={classes.root} noValidate autoComplete="off">
@@ -43,10 +62,11 @@ function SearchFrom() {
         </div>
         <div>
           <Button
-            variant="contained"
             color="primary"
-            size="large"
             endIcon={<Icon>send</Icon>}
+            onClick={makeRequest}
+            size="large"
+            variant="contained"
           >
             Search
           </Button>

@@ -4,7 +4,6 @@ import Drawer from './components/drawer';
 import SearchScreen from './components/search-screen';
 import ResultsScreen from './components/results-screen';
 
-
 function App() {
   return (
     <>
