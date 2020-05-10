@@ -13,10 +13,10 @@ function SearchFrom() {
   const [state, dispatch] = useContext(Store);
   const [videoUrl, setVideoUrl] = useState('');
   const [keywords, setKeywords] = useState('');
-  const videoId = videoUrlIsValid(videoUrl);
+  let videoId = videoUrlIsValid(videoUrl);
 
   const makeRequest = useCallback(() => {
-    fetchComments(dispatch);
+    fetchComments(dispatch, { videoId });
   }, [state, dispatch]);
   const classes = useStyles();
 
@@ -36,6 +36,7 @@ function SearchFrom() {
             }
             label="Video url"
             onChange={(e) => {
+              videoId = videoUrlIsValid(e.target.value);
               setVideoUrl(e.target.value);
             }}
             value={videoUrl}

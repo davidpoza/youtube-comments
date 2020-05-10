@@ -1,17 +1,34 @@
 import moment from 'moment';
 import { v4 as uuid } from 'uuid';
+import get from 'lodash.get';
 import api from '../api';
+import createSearch from '../models/search';
 
 /* eslint-disable import/prefer-default-export */
-export function fetchComments(dispatch) {
+export function fetchComments(dispatch, { videoId, keywords }) {
+  const search = createSearch({
+    id: uuid(),
+    date: moment().format('DD-MM-YYYY HH:mm'),
+    videoId,
+    videoTitle: 'temporal title',
+    keywords,
+  });
   dispatch({
     type: 'GET_COMMENTS_ATTEMPT',
   });
-  api.comments.search()
+  api.videos.list(videoId)
     .then((data) => {
+      if (data.items.length > 0) {
+        search.videoTitle = get(data.items[0], 'snippet.title');
+        return (api.comments.search(videoId, keywords));
+      }
+      return Promise.reject(new Error('Video does not exist'));
+    })
+    .then((data) => {
+      search.totalResults = get(data, 'pageInfo.totalResults');
       dispatch({
         type: 'GET_COMMENTS_SUCCESS',
-        payload: { id: uuid(), date: moment().format('DD-MM-YYYY HH:mm'), content: 'hola' },
+        payload: search,
       });
     })
     .catch((err) => {
