@@ -42,9 +42,14 @@ function SearchFrom() {
       <form className={classes.root} noValidate autoComplete="off">
         <div>
           <TextField
-            error={!videoUrlIsValid(videoUrl) && true}
+            error={videoUrl !== '' && !videoUrlIsValid(videoUrl) && true}
             fullWidth
-            helperText={!videoUrlIsValid(videoUrl) && 'Url is not valid'}
+            helperText={
+              videoUrl === ''
+                ? 'You must enter an url'
+                : !videoUrlIsValid(videoUrl)
+                  && 'Url is not valid: It must be like https://www.youtube.com/watch?v=RKfmyrBMLfw'
+            }
             label="Video url"
             onChange={(e) => {
               setVideoUrl(e.target.value);
