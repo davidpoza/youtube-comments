@@ -16,8 +16,10 @@ function SearchFrom() {
   let videoId = videoUrlIsValid(videoUrl);
 
   const makeRequest = useCallback(() => {
-    fetchComments(dispatch, { videoId });
-  }, [state, dispatch]);
+    if (videoId && keywords !== '') {
+      fetchComments(dispatch, { videoId });
+    }
+  }, [state, dispatch, videoId, keywords]);
   const classes = useStyles();
 
   return (
