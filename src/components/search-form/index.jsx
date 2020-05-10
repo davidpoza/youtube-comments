@@ -38,7 +38,7 @@ function SearchFrom() {
   const classes = useStyles();
 
   return (
-    <Grid item xs={10} md={6}>
+    <Grid item xs={10} md={6} xl={3}>
       <form className={classes.root} noValidate autoComplete="off">
         <div>
           <TextField
