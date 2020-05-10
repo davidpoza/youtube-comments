@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import storeReducer from './store-reducer';
 
 const initialState = {
+  loading: false,
   history: {
     xxx: {
       date: '09/05/2020 18:29',
