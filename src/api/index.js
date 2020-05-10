@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
-import mockGetComments from './mocks/get-comments';
 import config from '../config';
+import mockGetComments from './mocks/get-comments';
 
 export default {
   user: {
