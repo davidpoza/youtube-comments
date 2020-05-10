@@ -1,11 +1,11 @@
 import React from 'react';
-import Container from "@material-ui/core/Container";
+import Container from '@material-ui/core/Container';
 
 function ResultsScreen() {
   return (
     <Container maxWidth="md">
-        Resultados
-      </Container>
+      Resultados
+    </Container>
   );
 }
 
