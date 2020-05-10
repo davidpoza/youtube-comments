@@ -4,6 +4,8 @@ import storeReducer from './store-reducer';
 
 const initialState = {
   loading: false,
+  error: false,
+  msg: '',
   history: {
     xxx: {
       date: '09/05/2020 18:29',

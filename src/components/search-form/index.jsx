@@ -3,45 +3,35 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
-import moment from 'moment';
-import { v4 as uuid } from 'uuid';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { videoUrlIsValid } from '../helpers/utils';
-import config from '../../config';
-import fetchMock from '../mocks/api';
 import Store from '../../reducers/store';
 import useStyles from './useStyles';
+import { fetchComments } from '../../actions/comments-actions';
 
 function SearchFrom() {
   const [state, dispatch] = useContext(Store);
   const [videoUrl, setVideoUrl] = useState('');
   const [keywords, setKeywords] = useState('');
+  const videoId = videoUrlIsValid(videoUrl);
+
   const makeRequest = useCallback(() => {
-    const q = [
-      config.apiBaseUrl,
-      'part=replies,snippet',
-      `&videoId=xxxx`,
-      `&textFormat=xxxx`,
-      `&maxResults=100`,
-      `&searchTerms=xxxx`, // TODO: encode
-    ].join('');
-    dispatch({ type: 'ADD_URL', payload: { id: uuid(), date: moment().format('DD-MM-YYYY HH:mm'), content: 'hola' } });
-    console.log('request lanzada: ', q);
-    console.log('estado: ', state);
-    return (fetchMock);
+    fetchComments(dispatch);
   }, [state, dispatch]);
   const classes = useStyles();
 
   return (
     <Grid item xs={10} md={6} xl={3}>
       <form className={classes.root} noValidate autoComplete="off">
+        { state.loading && <CircularProgress /> }
         <div>
           <TextField
-            error={videoUrl !== '' && !videoUrlIsValid(videoUrl) && true}
+            error={videoUrl !== '' && !videoId && true}
             fullWidth
             helperText={
               videoUrl === ''
                 ? 'You must enter an url'
-                : !videoUrlIsValid(videoUrl)
+                : !videoId
                   && 'Url is not valid: It must be like https://www.youtube.com/watch?v=RKfmyrBMLfw'
             }
             label="Video url"
