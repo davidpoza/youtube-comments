@@ -1,5 +1,4 @@
 import React, { useState, useContext, useCallback } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -8,19 +7,12 @@ import { videoUrlIsValid } from '../helpers/utils';
 import config from '../../config';
 import fetchMock from '../mocks/api';
 import Store from '../../reducers/store';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    textAlign: 'center',
-    '& > *': {
-      margin: theme.spacing(2),
-    },
-  },
-}));
+import useStyles from './useStyles';
 
 function SearchFrom() {
   const [state, dispatch] = useContext(Store);
   const [videoUrl, setVideoUrl] = useState('');
+  const [keywords, setKeywords] = useState('');
   const makeRequest = useCallback(() => {
     const q = [
       config.apiBaseUrl,
@@ -60,9 +52,13 @@ function SearchFrom() {
         </div>
         <div>
           <TextField
-            label="Keywords to find"
-            variant="outlined"
             fullWidth
+            label="Keywords to find"
+            onChange={(e) => {
+              setKeywords(e.target.value);
+            }}
+            value={keywords}
+            variant="outlined"
           />
         </div>
         <div>
