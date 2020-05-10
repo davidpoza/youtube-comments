@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Grid from '@material-ui/core/Grid';
+import AlertBar from '../alert-bar';
 import SearchForm from '../search-form';
+import Store from '../../reducers/store';
 
 function SearchScreen() {
+  const [state, dispatch] = useContext(Store);
   return (
     <Grid
       container
@@ -12,6 +15,7 @@ function SearchScreen() {
       style={{ minHeight: '100vh' }}
     >
       <SearchForm />
+      <AlertBar msg={state.msg} error={state.error} />
     </Grid>
   );
 }

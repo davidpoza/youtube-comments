@@ -12,6 +12,10 @@ export default function reducer(state, action) {
       return {
         ...state, loading: false, error: true, msg: action.payload.msg,
       };
+    case 'CLEAN_ALERT_BAR':
+      return {
+        ...state, msg: '',
+      };
     default:
       return state;
   }

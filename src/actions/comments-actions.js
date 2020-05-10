@@ -34,9 +34,15 @@ export function fetchComments(dispatch, { videoId, keywords }) {
     .catch((err) => {
       dispatch({
         type: 'GET_COMMENTS_FAIL',
-        payload: { msg: `Error fetching: ${err.msg}` },
+        payload: { msg: `Error fetching: ${err.message}` },
       });
     });
 }
 
+
+export function cleanAlertBar(dispatch) {
+  dispatch({
+    type: 'CLEAN_ALERT_BAR',
+  });
+}
 /* eslint-enable import/prefer-default-export */
