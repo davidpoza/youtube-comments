@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
+import moment from 'moment';
 import { v4 as uuid } from 'uuid';
 import { videoUrlIsValid } from '../helpers/utils';
 import config from '../../config';
@@ -23,9 +24,9 @@ function SearchFrom() {
       `&maxResults=100`,
       `&searchTerms=xxxx`, // TODO: encode
     ].join('');
+    dispatch({ type: 'ADD_URL', payload: { id: uuid(), date: moment().format('DD-MM-YYYY HH:mm'), content: 'hola' } });
     console.log('request lanzada: ', q);
     console.log('estado: ', state);
-    dispatch({ type: 'ADD_URL', payload: { id: uuid(), date: '10/05/2020 12:29', content: 'hola' } });
     return (fetchMock);
   }, [state, dispatch]);
   const classes = useStyles();
