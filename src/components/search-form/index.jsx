@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
+import { v4 as uuid } from 'uuid';
 import { videoUrlIsValid } from '../helpers/utils';
 import config from '../../config';
 import fetchMock from '../mocks/api';
@@ -24,7 +25,7 @@ function SearchFrom() {
     ].join('');
     console.log('request lanzada: ', q);
     console.log('estado: ', state);
-    dispatch({ type: 'ADD_URL', payload: { id: 'xxxx', date: '10/05/2020 12:29', content: 'hola' } });
+    dispatch({ type: 'ADD_URL', payload: { id: uuid(), date: '10/05/2020 12:29', content: 'hola' } });
     return (fetchMock);
   }, [state, dispatch]);
   const classes = useStyles();
