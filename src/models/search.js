@@ -3,6 +3,7 @@ export default function createSearch({
   date, // date of search
   id,
   keywords,
+  totalResults = 0,
   username,
   videoId,
   videoTitle,
@@ -12,6 +13,7 @@ export default function createSearch({
     date,
     id,
     keywords,
+    totalResults,
     username,
     videoId,
     videoTitle,
