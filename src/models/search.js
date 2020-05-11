@@ -4,7 +4,8 @@ export default function createSearch({
   id,
   keywords,
   totalResults = 0,
-  userName,
+  userName, // channel name
+  userLink, // chanel link
   videoId,
   videoTitle,
 }) {
@@ -15,6 +16,7 @@ export default function createSearch({
     keywords,
     totalResults,
     userName,
+    userLink,
     videoId,
     videoTitle,
   });
