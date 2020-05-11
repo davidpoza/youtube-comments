@@ -22,6 +22,9 @@ export function fetchComments(dispatch, { videoId, keywords }) {
         search.videoTitle = get(data.items[0], 'snippet.title');
         search.userLink = `https://youptube.com/channel/${get(data.items[0], 'snippet.channelId')}/videos`;
         search.userName = get(data.items[0], 'snippet.channelTitle');
+        search.imageLink = get(data.items[0], 'snippet.thumbnails.default.url');
+        search.imageWidth = get(data.items[0], 'snippet.thumbnails.default.width');
+        search.imageHeight = get(data.items[0], 'snippet.thumbnails.default.height');
         return (api.comments.search(videoId, keywords));
       }
       return Promise.reject(new Error('Video does not exist'));
