@@ -1,68 +1,44 @@
-import React from 'react';
-import clsx from 'clsx';
+import React, { useContext, useCallback } from 'react';
+import get from 'lodash.get';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MenuIcon from '@material-ui/icons/Menu';
-import MailIcon from '@material-ui/icons/Mail';
+import Store from '../../reducers/store';
 import useStyles from './useStyles';
-
+import DrawerItem from '../drawer-item';
 
 export default function Drawer() {
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
-  });
+  const [state, dispatch] = useContext(Store);
+  const [open, setOpen] = React.useState(false);
 
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event
-      && event.type === 'keydown'
-      && (event.key === 'Tab' || event.key === 'Shift')
-    ) {
-      return;
-    }
+  const toggleDrawer = useCallback(() => {
+    setOpen(!open);
+  }, [open]);
 
-    setState({ ...state, [anchor]: open });
-  };
-
-  const list = (anchor) => (
-    <div
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
-      })}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
+  const list = () => (
+    <div className={classes.list}>
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        {
+          Object.keys(state.history).map((id) => {
+            const imageUrl = get(state.history[id], 'imageLink');
+            const keywords = get(state.history[id], 'keywords');
+            const title = get(state.history[id], 'videoTitle');
+            const userLink = get(state.history[id], 'userLink');
+            const userName = get(state.history[id], 'userName');
+            return (
+              <DrawerItem
+                key={id}
+                imageUrl={imageUrl}
+                keywords={keywords}
+                title={title}
+                userLink={userLink}
+                userName={userName}
+              />
+            );
+          })
+        }
       </List>
     </div>
   );
@@ -71,13 +47,13 @@ export default function Drawer() {
     <div>
       <SwipeableDrawer
         anchor="left"
-        open={state.left}
-        onClose={toggleDrawer('left', false)}
-        onOpen={toggleDrawer('left', true)}
+        open={open}
+        onClose={toggleDrawer}
+        onOpen={toggleDrawer}
       >
-        {list('left')}
+        {list()}
       </SwipeableDrawer>
-      <IconButton color="primary" onClick={toggleDrawer('left', true)}>
+      <IconButton color="primary" onClick={toggleDrawer}>
         <MenuIcon />
       </IconButton>
     </div>

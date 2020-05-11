@@ -20,7 +20,7 @@ export function fetchComments(dispatch, { videoId, keywords }) {
     .then((data) => {
       if (data.items.length > 0) {
         search.videoTitle = get(data.items[0], 'snippet.title');
-        search.userLink = `https://youptube.com/channel/${get(data.items[0], 'snippet.channelId')}/videos`;
+        search.userLink = `https://youtube.com/channel/${get(data.items[0], 'snippet.channelId')}/videos`;
         search.userName = get(data.items[0], 'snippet.channelTitle');
         search.imageLink = get(data.items[0], 'snippet.thumbnails.default.url');
         search.imageWidth = get(data.items[0], 'snippet.thumbnails.default.width');

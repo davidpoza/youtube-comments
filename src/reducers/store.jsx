@@ -6,12 +6,7 @@ const initialState = {
   loading: false,
   error: false,
   msg: '',
-  history: {
-    xxx: {
-      date: '09/05/2020 18:29',
-      content: 'comentario',
-    },
-  },
+  history: {}, // object with search entities as values
 };
 
 const Store = createContext(initialState);
