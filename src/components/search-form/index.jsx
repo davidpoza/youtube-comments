@@ -17,7 +17,7 @@ function SearchFrom() {
 
   const makeRequest = useCallback(() => {
     if (videoId && keywords !== '') {
-      fetchComments(dispatch, { videoId });
+      fetchComments(dispatch, { videoId, keywords });
     }
   }, [state, dispatch, videoId, keywords]);
   const classes = useStyles();
