@@ -11,6 +11,7 @@ function SearchScreen() {
   useEffect(() => {
     if (state.lastSearchId) {
       history.push(`/results/${state.lastSearchId}`);
+      dispatch({ type: 'CLEAN_LAST_SEARCH_ID' });
     }
   }, [state.lastSearchId]);
   return (

@@ -18,6 +18,10 @@ export default function reducer(state, action) {
       return {
         ...state, msg: '',
       };
+    case 'CLEAN_LAST_SEARCH_ID':
+      return {
+        ...state, lastSearchId: undefined,
+      };
     default:
       return state;
   }
