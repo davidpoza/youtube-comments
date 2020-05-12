@@ -30,20 +30,27 @@ export default function DrawerItem(props) {
           </a>
         </ListItemAvatar>
         <ListItemText
+          classes={{ primary: classes.title }}
           primary={title}
           secondary={(
             <>
               <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
+                variant="h1"
+                className={classes.author}
                 color="textPrimary"
+                component="a"
+                href={userLink}
               >
-                <a href={userLink}>{userName}</a>
+                {userName}
               </Typography>
-              <p>
+              <Typography
+                variant="body1"
+                className={classes.content}
+                color="textPrimary"
+                component="span"
+              >
                 {keywords}
-              </p>
+              </Typography>
             </>
           )}
         />

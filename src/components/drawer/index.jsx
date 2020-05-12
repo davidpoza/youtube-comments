@@ -18,29 +18,27 @@ export default function Drawer() {
   }, [open]);
 
   const list = () => (
-    <div className={classes.list}>
-      <List>
-        {
-          Object.keys(state.history).map((id) => {
-            const imageUrl = get(state.history[id], 'imageLink');
-            const keywords = get(state.history[id], 'keywords');
-            const title = get(state.history[id], 'videoTitle');
-            const userLink = get(state.history[id], 'userLink');
-            const userName = get(state.history[id], 'userName');
-            return (
-              <DrawerItem
-                key={id}
-                imageUrl={imageUrl}
-                keywords={keywords}
-                title={title}
-                userLink={userLink}
-                userName={userName}
-              />
-            );
-          })
-        }
-      </List>
-    </div>
+    <List className={classes.list}>
+      {
+        Object.keys(state.history).map((id) => {
+          const imageUrl = get(state.history[id], 'imageLink');
+          const keywords = get(state.history[id], 'keywords');
+          const title = get(state.history[id], 'videoTitle');
+          const userLink = get(state.history[id], 'userLink');
+          const userName = get(state.history[id], 'userName');
+          return (
+            <DrawerItem
+              key={id}
+              imageUrl={imageUrl}
+              keywords={keywords}
+              title={title}
+              userLink={userLink}
+              userName={userName}
+            />
+          );
+        })
+      }
+    </List>
   );
 
   return (
