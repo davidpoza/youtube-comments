@@ -26,14 +26,16 @@ export default function Drawer() {
           const title = get(state.history[id], 'videoTitle');
           const userLink = get(state.history[id], 'userLink');
           const userName = get(state.history[id], 'userName');
+          const videoId = get(state.history[id], 'videoId');
           return (
             <DrawerItem
-              key={id}
               imageUrl={imageUrl}
+              key={id}
               keywords={keywords}
               title={title}
               userLink={userLink}
               userName={userName}
+              videoLink={`https://www.youtube.com/watch?v=${videoId}`}
             />
           );
         })
