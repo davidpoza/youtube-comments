@@ -9,8 +9,8 @@ function App() {
     <>
       <Drawer />
       <Router>
-        <Route path="/" component={SearchScreen} />
-        <Route path="/results" component={ResultsScreen} />
+        <Route exact path="/" component={SearchScreen} />
+        <Route path="/results/:searchId" component={ResultsScreen} />
       </Router>
     </>
   );

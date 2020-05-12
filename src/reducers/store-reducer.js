@@ -3,11 +3,13 @@ export default function reducer(state, action) {
   switch (action.type) {
     case 'GET_COMMENTS_ATTEMPT':
       return {
-        ...state, loading: true, error: false,
+        ...state, loading: true, error: false, lastSearchId: undefined,
       };
     case 'GET_COMMENTS_SUCCESS':
       newHistory[action.payload.id] = { ...action.payload };
-      return { ...state, history: newHistory, loading: false };
+      return {
+        ...state, history: newHistory, loading: false, lastSearchId: action.payload.id,
+      };
     case 'GET_COMMENTS_FAIL':
       return {
         ...state, loading: false, error: true, msg: action.payload.msg,

@@ -6,6 +6,7 @@ const initialState = {
   loading: false,
   error: false,
   msg: '',
+  lastSearchId: undefined,
   history: {}, // object with search entities as values
 };
 
