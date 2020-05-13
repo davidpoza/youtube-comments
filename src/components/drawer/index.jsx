@@ -31,6 +31,7 @@ export default function Drawer() {
             <DrawerItem
               imageUrl={imageUrl}
               key={id}
+              videoId={id}
               keywords={keywords}
               title={title}
               userLink={userLink}

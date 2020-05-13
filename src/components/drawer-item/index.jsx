@@ -18,6 +18,7 @@ export default function DrawerItem(props) {
     title,
     userLink,
     userName,
+    videoId,
     videoLink,
   } = props;
   const classes = useStyles();
@@ -30,8 +31,17 @@ export default function DrawerItem(props) {
           </a>
         </ListItemAvatar>
         <ListItemText
-          classes={{ primary: classes.title }}
-          primary={title}
+          primary={(
+            <Typography
+              variant="h1"
+              className={classes.title}
+              color="textPrimary"
+              component="a"
+              href={`/results/${videoId}`}
+            >
+              {title}
+            </Typography>
+          )}
           secondary={(
             <>
               <Typography
@@ -69,5 +79,6 @@ DrawerItem.propTypes = {
   title: PropTypes.string,
   userLink: PropTypes.string,
   userName: PropTypes.string,
+  videoId: PropTypes.string,
   videoLink: PropTypes.string,
 };

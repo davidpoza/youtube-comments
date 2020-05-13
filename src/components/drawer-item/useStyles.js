@@ -7,6 +7,8 @@ export default makeStyles({
   },
   title: {
     fontSize: '0.7em',
+    textDecoration: 'none',
+    fontWeight: 400,
   },
   author: {
     display: 'inline',
