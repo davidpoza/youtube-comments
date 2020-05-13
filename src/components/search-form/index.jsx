@@ -53,6 +53,11 @@ function SearchFrom() {
             onChange={(e) => {
               setKeywords(e.target.value);
             }}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                makeRequest();
+              }
+            }}
             value={keywords}
             variant="outlined"
           />
@@ -60,10 +65,11 @@ function SearchFrom() {
         <div>
           <Button
             color="primary"
-            endIcon={<Icon>send</Icon>}
+            endIcon={<Icon>search</Icon>}
             onClick={makeRequest}
             size="large"
             variant="contained"
+            disabled={!(videoId && keywords !== '')}
           >
             Search
           </Button>
