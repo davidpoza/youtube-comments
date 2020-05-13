@@ -22,6 +22,7 @@ export default function Drawer() {
     <List className={classes.list}>
       {
         Object.keys(state.history).map((id) => {
+          const date = get(state.history[id], 'date');
           const imageUrl = get(state.history[id], 'imageLink');
           const keywords = get(state.history[id], 'keywords');
           const title = get(state.history[id], 'videoTitle');
@@ -30,13 +31,14 @@ export default function Drawer() {
           const videoId = get(state.history[id], 'videoId');
           return (
             <DrawerItem
+              date={date}
               imageUrl={imageUrl}
               key={id}
-              videoId={id}
               keywords={keywords}
               title={title}
               userLink={userLink}
               userName={userName}
+              videoId={id}
               videoLink={`https://www.youtube.com/watch?v=${videoId}`}
             />
           );

@@ -2,13 +2,15 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles({
   root: {
-    width: '100%',
-    maxWidth: '36ch',
+    lineHeight: 1,
   },
   title: {
     fontSize: '0.7em',
     textDecoration: 'none',
     fontWeight: 400,
+  },
+  date: {
+    fontSize: '0.6em',
   },
   author: {
     display: 'inline',

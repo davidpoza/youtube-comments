@@ -31,16 +31,26 @@ export default function DrawerItem(props) {
           </a>
         </ListItemAvatar>
         <ListItemText
+          classes={{ primary: classes.root }}
           primary={(
-            <Typography
-              variant="h1"
-              className={classes.title}
-              color="textPrimary"
-              component="a"
-              href={`/results/${videoId}`}
-            >
-              {title}
-            </Typography>
+            <>
+              <Typography
+                variant="h1"
+                className={classes.title}
+                color="textPrimary"
+                component="a"
+                href={`/results/${videoId}`}
+              >
+                {title}
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                className={classes.date}
+                color="textPrimary"
+              >
+                {date}
+              </Typography>
+            </>
           )}
           secondary={(
             <>
