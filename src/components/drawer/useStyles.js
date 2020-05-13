@@ -7,4 +7,8 @@ export default makeStyles({
   fullList: {
     width: 'auto',
   },
+  title: {
+    textAlign: 'center',
+    backgroundColor: '#f1f0f0',
+  },
 });

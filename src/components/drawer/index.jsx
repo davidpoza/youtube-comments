@@ -4,6 +4,7 @@ import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import MenuIcon from '@material-ui/icons/Menu';
+import Typography from '@material-ui/core/Typography';
 import Store from '../../reducers/store';
 import useStyles from './useStyles';
 import DrawerItem from '../drawer-item';
@@ -52,6 +53,9 @@ export default function Drawer() {
         onClose={toggleDrawer}
         onOpen={toggleDrawer}
       >
+        <Typography className={classes.title} variant="h6" component="h2">
+          Search history
+        </Typography>
         {list()}
       </SwipeableDrawer>
       <IconButton color="primary" onClick={toggleDrawer}>
