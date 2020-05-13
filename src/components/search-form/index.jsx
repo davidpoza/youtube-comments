@@ -28,6 +28,7 @@ function SearchFrom() {
         { state.loading && <CircularProgress /> }
         <div>
           <TextField
+            autoFocus
             error={videoUrl !== '' && !videoId && true}
             fullWidth
             helperText={
