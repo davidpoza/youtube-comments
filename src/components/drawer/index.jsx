@@ -37,6 +37,7 @@ export default function Drawer() {
           })
           .map((obj) => (
             <DrawerItem
+              id={get(obj, 'id')}
               date={get(obj, 'date')}
               imageUrl={get(obj, 'imageLink')}
               key={get(obj, 'id')}

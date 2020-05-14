@@ -50,4 +50,11 @@ export function cleanAlertBar(dispatch) {
     type: 'CLEAN_ALERT_BAR',
   });
 }
+
+export function removeSearch(dispatch, { searchId }) {
+  dispatch({
+    type: 'REMOVE_SEARCH',
+    payload: { id: searchId },
+  });
+}
 /* eslint-enable import/prefer-default-export */

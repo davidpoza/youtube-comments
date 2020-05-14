@@ -22,6 +22,13 @@ export default function reducer(state, action) {
       return {
         ...state, lastSearchId: undefined,
       };
+    case 'REMOVE_SEARCH':
+      if (newHistory[action.payload.id]) {
+        delete newHistory[action.payload.id];
+      }
+      return {
+        ...state, history: newHistory,
+      };
     default:
       return state;
   }

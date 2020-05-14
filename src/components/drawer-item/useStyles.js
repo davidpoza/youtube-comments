@@ -21,4 +21,7 @@ export default makeStyles({
     fontSize: '0.7em',
     display: 'block',
   },
+  remove: {
+    fontSize: '0.9em',
+  },
 });

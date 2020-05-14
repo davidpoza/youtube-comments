@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
@@ -6,10 +6,14 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import Icon from '@material-ui/core/Icon';
 import useStyles from './useStyles';
-
+import Store from '../../reducers/store';
+import { removeSearch } from '../../actions/comments-actions';
 export default function DrawerItem(props) {
   const {
+    id,
     date,
     imageHeight,
     imageUrl,
@@ -22,6 +26,10 @@ export default function DrawerItem(props) {
     videoLink,
   } = props;
   const classes = useStyles();
+  const [state, dispatch] = useContext(Store);
+  const remove = useCallback(() => {
+    removeSearch(dispatch, { searchId: id });
+  });
   return (
     <>
       <ListItem alignItems="flex-start">
@@ -34,6 +42,11 @@ export default function DrawerItem(props) {
           classes={{ primary: classes.root }}
           primary={(
             <>
+              <ListItemSecondaryAction>
+                <Icon fontSize="small" className={classes.remove} onClick={remove}>
+                  remove_circle
+                </Icon>
+              </ListItemSecondaryAction>
               <Typography
                 variant="h1"
                 className={classes.title}
@@ -81,6 +94,7 @@ export default function DrawerItem(props) {
 }
 
 DrawerItem.propTypes = {
+  id: PropTypes.string,
   date: PropTypes.string,
   imageHeight: PropTypes.number,
   imageUrl: PropTypes.string,
