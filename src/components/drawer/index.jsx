@@ -1,4 +1,5 @@
 import React, { useContext, useCallback } from 'react';
+import moment from 'moment';
 import get from 'lodash.get';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import IconButton from '@material-ui/core/IconButton';
@@ -21,28 +22,32 @@ export default function Drawer() {
   const list = () => (
     <List className={classes.list}>
       {
-        Object.keys(state.history).map((id) => {
-          const date = get(state.history[id], 'date');
-          const imageUrl = get(state.history[id], 'imageLink');
-          const keywords = get(state.history[id], 'keywords');
-          const title = get(state.history[id], 'videoTitle');
-          const userLink = get(state.history[id], 'userLink');
-          const userName = get(state.history[id], 'userName');
-          const videoId = get(state.history[id], 'videoId');
-          return (
+        Object.keys(state.history)
+          .map((id) => (state.history[id]))
+          .sort((a, b) => {
+            const date1 = moment(a.date, 'DD-MM-YYYY HH:mm');
+            const date2 = moment(b.date, 'DD-MM-YYYY HH:mm');
+            if (date1.isBefore(date2)) {
+              return (1);
+            }
+            if (date2.isBefore(date1)) {
+              return (-1);
+            }
+            return (0);
+          })
+          .map((obj) => (
             <DrawerItem
-              date={date}
-              imageUrl={imageUrl}
-              key={id}
-              keywords={keywords}
-              title={title}
-              userLink={userLink}
-              userName={userName}
-              videoId={id}
-              videoLink={`https://www.youtube.com/watch?v=${videoId}`}
+              date={get(obj, 'date')}
+              imageUrl={get(obj, 'imageLink')}
+              key={get(obj, 'id')}
+              keywords={get(obj, 'keywords')}
+              title={get(obj, 'videoTitle')}
+              userLink={get(obj, 'userLink')}
+              userName={get(obj, 'userName')}
+              videoId={get(obj, 'videoId')}
+              videoLink={`https://www.youtube.com/watch?v=${get(obj, 'videoId')}`}
             />
-          );
-        })
+          ))
       }
     </List>
   );
