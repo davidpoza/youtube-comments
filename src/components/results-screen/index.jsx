@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 import Store from '../../reducers/store';
+import VideoPlayer from '../video-player';
 
 function ResultsScreen() {
   const { searchId } = useParams();
@@ -10,7 +11,7 @@ function ResultsScreen() {
 
   return (
     <Container maxWidth="md">
-      Resultados {searchId}
+      <VideoPlayer />
     </Container>
   );
 }
