@@ -52,7 +52,7 @@ export default function DrawerItem(props) {
                 className={classes.title}
                 color="textPrimary"
                 component="a"
-                href={`/results/${videoId}`}
+                href={`/results/${id}`}
               >
                 {title}
               </Typography>
