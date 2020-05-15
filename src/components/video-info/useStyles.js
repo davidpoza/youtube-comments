@@ -6,7 +6,8 @@ export default makeStyles(() => ({
     margin: '0.4em 0 0.2em 0',
   },
   date: {
-    fontSize: '1.5em',
+    fontSize: '1em',
+    fontWeight: 200,
     margin: '0.2em 0 0.2em 0',
   },
 }));
