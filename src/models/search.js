@@ -12,6 +12,7 @@ export default function createSearch({
   videoId,
   videoTitle,
   videoDescription,
+  videoDate, // date of video
 }) {
   return ({
     comments,
@@ -27,5 +28,6 @@ export default function createSearch({
     videoId,
     videoTitle,
     videoDescription,
+    videoDate,
   });
 }

@@ -4,6 +4,7 @@ import Container from '@material-ui/core/Container';
 import get from 'lodash.get';
 import Store from '../../reducers/store';
 import VideoPlayer from '../video-player';
+import VideoInfo from '../video-info';
 
 function ResultsScreen() {
   const { searchId } = useParams();
@@ -13,13 +14,19 @@ function ResultsScreen() {
 
   if (search) {
     return (
-      <Container maxWidth="md">
+      <div>
         <VideoPlayer
           videoId={search.videoId}
-          title={search.videoTitle}
-          description={search.videoDescription}
         />
-      </Container>
+        <Container maxWidth="lg">
+          <VideoInfo
+            title={search.videoTitle}
+            description={search.videoDescription}
+            date={search.videoDate}
+          />
+          comentarios
+        </Container>
+      </div>
     );
   }
   return (null);

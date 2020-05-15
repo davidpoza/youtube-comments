@@ -21,6 +21,7 @@ export function fetchComments(dispatch, { videoId, keywords }) {
       if (data.items.length > 0) {
         search.videoTitle = get(data.items[0], 'snippet.title');
         search.videoDescription = get(data.items[0], 'snippet.description');
+        search.videoDate = get(data.items[0], 'snippet.publishedAt');
         search.userLink = `https://youtube.com/channel/${get(data.items[0], 'snippet.channelId')}/videos`;
         search.userName = get(data.items[0], 'snippet.channelTitle');
         search.imageLink = get(data.items[0], 'snippet.thumbnails.default.url');
