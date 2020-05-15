@@ -14,4 +14,8 @@ export default makeStyles(() => ({
       height: '100%',
     },
   },
+  title: {
+    fontSize: '1.5em',
+    margin: '0.4em 0 0.4em 0',
+  },
 }));

@@ -11,6 +11,7 @@ export default function createSearch({
   imageHeight,
   videoId,
   videoTitle,
+  videoDescription,
 }) {
   return ({
     comments,
@@ -25,5 +26,6 @@ export default function createSearch({
     imageHeight,
     videoId,
     videoTitle,
+    videoDescription,
   });
 }
