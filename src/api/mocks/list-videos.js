@@ -1,57 +1,68 @@
 /* eslint-disable max-len */
 export default {
   kind: 'youtube#videoListResponse',
-  etag: 'bq4PYPfsOtWLgABg1znFMyer8c0',
+  etag: 'zj_hsZmbexZr1tluaml6H6X25Fc',
   items: [
     {
       kind: 'youtube#video',
-      etag: 'tKv108SzKALJmvlWbeaDSVOBZco',
-      id: '52P1unHv7ME',
+      etag: 'rFPlENB6skQn4XLuaQmg-QUQceU',
+      id: 'aJMu-btOpDs',
       snippet: {
-        publishedAt: '2020-04-28T02:27:29Z',
-        channelId: 'UCfgOUydlU2iIrKjWQKmoB5A',
-        title: 'RESISTENCIA SMD LAPTOP QUE TANTO FALLAN?',
+        publishedAt: '2020-05-15T16:00:00Z',
+        channelId: 'UCJgGc8pQO1lv04VXrBxA_Hg',
+        title:
+          '🔴 [Directo] #EStreamerCoders: Hablamos de Deno y un rato de charla',
         description:
-          'Como realizar  mediciones  basicas de corriente DC ,en componentes SMD como las resistencias-consideraciones\n\n####SUSCRIBETE#####\n\n\nGRACIAS POR VER MIS VIDEOS',
+          'Hablamos un poco de Deno, el "nuevo" Node, y un poco de chill 😉\n\n🤳 Sígueme en Instagram para no perderte nada: https://instagram.com/carlosazaustre\n\n▶️  No olvides suscribirte para no perderte ningún vídeo https://youtube.com/carlosazaustre?sub_confirmation=1\n\nSi te gusta el contenido que comparto puedes apoyarme de varias formas:\n☕️ Invitándome a un café virtual:\nhttps://www.buymeacoffee.com/carlosazaustre\n👍 Siendo mi Sponsor en Github:\nhttps://github.com/sponsors/carlosazaustre',
         thumbnails: {
           default: {
-            url: 'https://i.ytimg.com/vi/52P1unHv7ME/default.jpg',
+            url: 'https://i.ytimg.com/vi/aJMu-btOpDs/default.jpg',
             width: 120,
             height: 90,
           },
           medium: {
-            url: 'https://i.ytimg.com/vi/52P1unHv7ME/mqdefault.jpg',
+            url: 'https://i.ytimg.com/vi/aJMu-btOpDs/mqdefault.jpg',
             width: 320,
             height: 180,
           },
           high: {
-            url: 'https://i.ytimg.com/vi/52P1unHv7ME/hqdefault.jpg',
+            url: 'https://i.ytimg.com/vi/aJMu-btOpDs/hqdefault.jpg',
             width: 480,
             height: 360,
           },
           standard: {
-            url: 'https://i.ytimg.com/vi/52P1unHv7ME/sddefault.jpg',
+            url: 'https://i.ytimg.com/vi/aJMu-btOpDs/sddefault.jpg',
             width: 640,
             height: 480,
           },
+          maxres: {
+            url: 'https://i.ytimg.com/vi/aJMu-btOpDs/maxresdefault.jpg',
+            width: 1280,
+            height: 720,
+          },
         },
-        channelTitle: 'ELECTROSOTOX',
+        channelTitle: 'Carlos Azaustre',
         tags: [
-          'CURSO REPARACION LAPTOP',
-          'MEDICION RESISTOR SMD',
-          'COMO REPARAR LAPTOP',
-          'electrosotox',
-          'curso de electronica gratis',
+          'carlos azaustre',
+          'javascript',
+          'desarrollo web',
+          'programación web',
+          'deno',
+          'directo',
+          'node.js',
+          'twitch',
+          'estreamercoders',
+          'livecoding',
         ],
-        categoryId: '28',
+        categoryId: '27',
         liveBroadcastContent: 'none',
-        defaultLanguage: 'es-419',
         localized: {
-          title: 'RESISTENCIA SMD LAPTOP QUE TANTO FALLAN?',
+          title:
+            '🔴 [Directo] #EStreamerCoders: Hablamos de Deno y un rato de charla',
           description:
-            'Como realizar  mediciones  basicas de corriente DC ,en componentes SMD como las resistencias-consideraciones\n\n####SUSCRIBETE#####\n\n\nGRACIAS POR VER MIS VIDEOS',
+            'Hablamos un poco de Deno, el "nuevo" Node, y un poco de chill 😉\n\n🤳 Sígueme en Instagram para no perderte nada: https://instagram.com/carlosazaustre\n\n▶️  No olvides suscribirte para no perderte ningún vídeo https://youtube.com/carlosazaustre?sub_confirmation=1\n\nSi te gusta el contenido que comparto puedes apoyarme de varias formas:\n☕️ Invitándome a un café virtual:\nhttps://www.buymeacoffee.com/carlosazaustre\n👍 Siendo mi Sponsor en Github:\nhttps://github.com/sponsors/carlosazaustre',
         },
-        defaultAudioLanguage: 'es-419',
+        defaultAudioLanguage: 'es',
       },
     },
   ],
