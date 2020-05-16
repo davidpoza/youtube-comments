@@ -29,7 +29,7 @@ export default function DescriptionBox(props) {
         {
           text.split('\n').map((item, i) => (
             // eslint-disable-next-line react/no-array-index-key
-            <p key={i}>
+            <p className={item !== '' ? classes.paragraph : undefined} key={i}>
               <Linkify>
                 {item}
               </Linkify>
