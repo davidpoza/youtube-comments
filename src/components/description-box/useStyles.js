@@ -10,6 +10,10 @@ export default makeStyles({
   dropDown: {
     height: '6em',
     overflow: 'hidden',
+    '& a:link, & a:visited': {
+      color: '#2e79da',
+      textDecoration: 'none',
+    },
   },
   dropDownOpen: {
     height: 'auto',
