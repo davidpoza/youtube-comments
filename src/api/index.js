@@ -2,6 +2,8 @@ import fetch from 'isomorphic-fetch';
 import config from '../config';
 import mockSearchComments from './mocks/search-comments';
 import mockListVideos from './mocks/list-videos';
+import mockListChannels from './mocks/list-channel';
+
 
 export default {
   user: {
@@ -28,6 +30,16 @@ export default {
         `&id=${videoId}`,
       ].join('');
       return (Promise.resolve(mockListVideos));
+    },
+  },
+  channels: {
+    list(channelId) {
+      const q = [
+        config.apiBaseUrl,
+        'part=snippet',
+        `&id=${channelId}`,
+      ].join('');
+      return (Promise.resolve(mockListChannels));
     },
   },
 };

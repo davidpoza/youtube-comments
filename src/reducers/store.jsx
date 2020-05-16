@@ -7,7 +7,7 @@ const initialState = {
   error: false,
   msg: '',
   lastSearchId: undefined,
-  history: {}, // object with search entities as values
+  history: {}, // object with search entities (/models/search.js)
 };
 
 const Store = createContext(initialState);

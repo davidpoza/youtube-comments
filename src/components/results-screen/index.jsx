@@ -5,6 +5,7 @@ import get from 'lodash.get';
 import Store from '../../reducers/store';
 import VideoPlayer from '../video-player';
 import VideoInfo from '../video-info';
+import { formatSubsCount } from '../helpers/utils';
 
 function ResultsScreen() {
   const { searchId } = useParams();
@@ -20,11 +21,16 @@ function ResultsScreen() {
         />
         <Container maxWidth="lg">
           <VideoInfo
-            title={search.videoTitle}
-            description={search.videoDescription}
             date={search.videoDate}
+            description={search.videoDescription}
+            title={search.videoTitle}
+            userImage={search.userImage}
+            userName={search.userName}
+            userSubsCount={formatSubsCount(search.userSubs)}
           />
-          comentarios
+          <div>
+            comentarios
+          </div>
         </Container>
       </div>
     );

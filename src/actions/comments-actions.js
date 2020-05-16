@@ -33,6 +33,11 @@ export function fetchComments(dispatch, { videoId, keywords }) {
     })
     .then((data) => {
       search.totalResults = get(data, 'pageInfo.totalResults');
+      return (api.channels.list(videoId, keywords));
+    })
+    .then((data) => {
+      search.userImage = get(data.items[0], 'snippet.thumbnails.default.url');
+      search.userSubs = get(data.items[0], 'statistics.subscriberCount');
       dispatch({
         type: 'GET_COMMENTS_SUCCESS',
         payload: search,

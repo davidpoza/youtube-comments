@@ -6,6 +6,8 @@ export default function createSearch({
   totalResults = 0,
   userName, // channel name
   userLink, // chanel link
+  userImage, // link to channel avatar
+  userSubs, // suscribers count
   imageLink,
   imageWidth,
   imageHeight,
@@ -23,6 +25,8 @@ export default function createSearch({
     userName,
     userLink,
     imageLink,
+    userImage,
+    userSubs,
     imageWidth,
     imageHeight,
     videoId,
