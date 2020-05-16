@@ -1,7 +1,6 @@
 import React, { useState, useContext, useCallback } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { videoUrlIsValid } from '../helpers/utils';
@@ -23,7 +22,7 @@ function SearchFrom() {
   const classes = useStyles();
 
   return (
-    <Grid item xs={10} md={6} xl={3}>
+    <div>
       <form className={classes.root} noValidate autoComplete="off">
         { state.loading && <CircularProgress /> }
         <div>
@@ -75,7 +74,7 @@ function SearchFrom() {
           </Button>
         </div>
       </form>
-    </Grid>
+    </div>
   );
 }
 
