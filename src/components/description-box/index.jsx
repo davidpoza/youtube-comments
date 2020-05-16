@@ -17,6 +17,7 @@ export default function DescriptionBox(props) {
   return (
     <Typography
       variant="body1"
+      component="div"
       className={classes.root}
       color="textPrimary"
     >
