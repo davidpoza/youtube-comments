@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import clsx from 'clsx';
 import useStyles from './useStyles';
-
+import Linkify from 'react-linkify';
 export default function DescriptionBox(props) {
   const [open, setOpen] = useState(false);
   const [btnText, setBtnText] = useState('SHOW MORE');
@@ -29,7 +29,11 @@ export default function DescriptionBox(props) {
         {
           text.split('\n').map((item, i) => (
             // eslint-disable-next-line react/no-array-index-key
-            <p key={i}>{item}</p>
+            <p key={i}>
+              <Linkify>
+                {item}
+              </Linkify>
+            </p>
           ))
         }
       </div>
