@@ -39,11 +39,10 @@ export default function VideoInfo(props) {
 
 VideoInfo.propTypes = {
   date: PropTypes.string,
-  description: PropTypes.string,
   title: PropTypes.string,
   userImage: PropTypes.string, // channel image url
   userLink: PropTypes.string, // channel link
   userName: PropTypes.string, // channel name
-  userSubsCount: PropTypes.number, // channel subscribers
+  userSubsCount: PropTypes.string, // channel subscribers
   videoId: PropTypes.string,
 };
