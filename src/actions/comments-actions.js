@@ -42,7 +42,7 @@ export function fetchComments(dispatch, { videoId, keywords }) {
           authorUrl: get(c, 'snippet.topLevelComment.snippet.authorChannelUrl'),
           publishedDate: get(c, 'snippet.topLevelComment.snippet.publishedAt'),
         });
-        comment.replies = get(c, 'replies.comments').map((r) => {
+        comment.replies = get(c, 'replies.comments', []).map((r) => {
           const reply = createComment({
             id: get(r, 'id'),
             text: get(r, 'snippet.textOriginal'),
