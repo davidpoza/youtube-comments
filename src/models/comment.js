@@ -4,7 +4,7 @@ export default function createComment({
   authorUrl,
   fav,
   publishedDate,
-  replies = [], // replies on this comment
+  replies = [], // replies on this comment, using same entity
   text,
 }) {
   return ({

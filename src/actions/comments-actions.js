@@ -3,6 +3,7 @@ import { v4 as uuid } from 'uuid';
 import get from 'lodash.get';
 import api from '../api';
 import createSearch from '../models/search';
+import createComment from '../models/comment';
 
 /* eslint-disable import/prefer-default-export */
 export function fetchComments(dispatch, { videoId, keywords }) {
@@ -33,6 +34,26 @@ export function fetchComments(dispatch, { videoId, keywords }) {
     })
     .then((data) => {
       search.totalResults = get(data, 'pageInfo.totalResults');
+      search.comments = data.items.map((c) => {
+        const comment = createComment({
+          text: get(c, 'snippet.topLevelComment.snippet.textOriginal'),
+          authorName: get(c, 'snippet.topLevelComment.snippet.authorDisplayName'),
+          authorImage: get(c, 'snippet.topLevelComment.snippet.authorProfileImageUrl'),
+          authorUrl: get(c, 'snippet.topLevelComment.snippet.authorChannelUrl'),
+          publishedDate: get(c, 'snippet.topLevelComment.snippet.publishedAt'),
+        });
+        comment.replies = get(c, 'replies.comments').map((r) => {
+          const reply = createComment({
+            text: get(r, 'snippet.textOriginal'),
+            authorName: get(r, 'snippet.authorDisplayName'),
+            authorImage: get(r, 'snippet.authorProfileImageUrl'),
+            authorUrl: get(r, 'snippet.authorChannelUrl'),
+            publishedDate: get(r, 'snippet.publishedAt'),
+          });
+          return (reply);
+        });
+        return (comment);
+      });
       return (api.channels.list(videoId, keywords));
     })
     .then((data) => {
