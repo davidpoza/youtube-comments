@@ -3,9 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 export default makeStyles((theme) => ({
   root: {
     display: 'flex',
-    height: 80,
-    alignItems: 'center',
+    alignItems: 'start',
     marginLeft: '0.5em',
+    marginBottom: '1em',
     '& > .avatar': {
       width: theme.spacing(5),
       height: theme.spacing(5),
@@ -13,9 +13,11 @@ export default makeStyles((theme) => ({
       margin: '0.5em 0.5em 0.5em 0',
     },
     '& .channelName': {
-      fontWeight: 'bold',
-      fontSize: '0.9em',
+      color: 'black',
+      fontWeight: 500,
+      fontSize: '0.8em',
       margin: '0.2em 0.2em 0 0',
+      textDecoration: 'none',
     },
     '& .date': {
       fontWeight: '200',
@@ -28,6 +30,20 @@ export default makeStyles((theme) => ({
     },
     '& .content': {
       marginLeft: '0.4em',
+      marginTop: '0.6em',
+    },
+  },
+  reply: {
+    marginLeft: '4em',
+    '& > .avatar': {
+      width: theme.spacing(3),
+      height: theme.spacing(3),
+      float: 'left',
+      margin: '0.5em 0.5em 0.5em 0',
+    },
+    '& .content': {
+      marginLeft: '0.4em',
+      marginTop: '0.5em',
     },
   },
 }));

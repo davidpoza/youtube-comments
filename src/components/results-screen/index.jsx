@@ -8,6 +8,7 @@ import VideoInfo from '../video-info';
 import DescriptionBox from '../description-box';
 import { formatSubsCount } from '../helpers/utils';
 import Comment from '../comment';
+import Replies from '../replies';
 
 function ResultsScreen() {
   const { searchId } = useParams();
@@ -33,13 +34,16 @@ function ResultsScreen() {
           <div>
             {
               search.comments.map((c) => (
-                <Comment
-                  text={c.text}
-                  authorImage={c.authorImage}
-                  authorName={c.authorName}
-                  authorUrl={c.authorUrl}
-                  publishedDate={c.publishedDate}
-                />
+                <div>
+                  <Comment
+                    text={c.text}
+                    authorImage={c.authorImage}
+                    authorName={c.authorName}
+                    authorUrl={c.authorUrl}
+                    publishedDate={c.publishedDate}
+                  />
+                  <Replies replies={c.replies} />
+                </div>
               ))
             }
           </div>
