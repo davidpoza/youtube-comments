@@ -5,7 +5,8 @@ export default makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'start',
     marginLeft: '0.5em',
-    marginBottom: '1em',
+    marginBottom: '0.5em',
+    marginTop: '0.5em',
     '& > .avatar': {
       width: theme.spacing(5),
       height: theme.spacing(5),
