@@ -1,5 +1,6 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, {
+  useState, useCallback, useRef, useEffect,
+} from 'react';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import Avatar from '@material-ui/core/Avatar';
@@ -7,6 +8,7 @@ import moment from 'moment';
 import get from 'lodash.get';
 import clsx from 'clsx';
 import useStyles from './useStyles';
+import { propTypes as commentPropTypes } from '../../models/comment';
 
 export default function Comment(props) {
   const {
@@ -75,14 +77,7 @@ export default function Comment(props) {
   );
 }
 
-Comment.propTypes = {
-  authorImage: PropTypes.string,
-  authorName: PropTypes.string,
-  authorUrl: PropTypes.string,
-  isReply: PropTypes.bool,
-  publishedDate: PropTypes.string,
-  text: PropTypes.string,
-};
+Comment.propTypes = commentPropTypes;
 
 Comment.defaultProps = {
   isReply: false,

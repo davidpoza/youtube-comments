@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export default function createComment({
   id,
   authorImage,
@@ -19,3 +21,12 @@ export default function createComment({
     text,
   });
 }
+
+export const propTypes = {
+  authorImage: PropTypes.string,
+  authorName: PropTypes.string,
+  authorUrl: PropTypes.string,
+  isReply: PropTypes.bool,
+  publishedDate: PropTypes.string,
+  text: PropTypes.string,
+};
