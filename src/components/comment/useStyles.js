@@ -46,4 +46,21 @@ export default makeStyles((theme) => ({
       marginTop: '0.5em',
     },
   },
+  dropDown: {
+    overflow: 'hidden',
+    '& a:link, & a:visited': {
+      color: '#606060',
+      textDecoration: 'none',
+    },
+    '& a:hover': {
+      color: '#606060',
+      textDecoration: 'underline',
+    },
+  },
+  dropDownClose: {
+    height: '5.5em',
+  },
+  dropDownOpen: {
+    height: 'auto',
+  },
 }));
