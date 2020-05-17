@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 import get from 'lodash.get';
+import moment from 'moment';
 import Store from '../../reducers/store';
 import VideoPlayer from '../video-player';
 import VideoInfo from '../video-info';
@@ -35,18 +36,30 @@ function ResultsScreen() {
           <DescriptionBox text={search.videoDescription} />
           <div className={classes.commentsBlock}>
             {
-              search.comments.map((c) => (
-                <div>
-                  <Comment
-                    text={c.text}
-                    authorImage={c.authorImage}
-                    authorName={c.authorName}
-                    authorUrl={c.authorUrl}
-                    publishedDate={c.publishedDate}
-                  />
-                  <Replies replies={c.replies} />
-                </div>
-              ))
+              search.comments
+                .sort((a, b) => {
+                  const dateA = moment(a.publishedDate);
+                  const dateB = moment(b.publishedDate);
+                  if (dateA.isBefore(dateB)) {
+                    return (-1);
+                  }
+                  if (dateB.isBefore(dateA)) {
+                    return (1);
+                  }
+                  return (0);
+                })
+                .map((c) => (
+                  <div>
+                    <Comment
+                      text={c.text}
+                      authorImage={c.authorImage}
+                      authorName={c.authorName}
+                      authorUrl={c.authorUrl}
+                      publishedDate={c.publishedDate}
+                    />
+                    <Replies replies={c.replies} />
+                  </div>
+                ))
             }
           </div>
         </Container>
