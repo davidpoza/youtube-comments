@@ -1,10 +1,11 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
+import Button from '@material-ui/core/Button';
 import clsx from 'clsx';
-import useStyles from './useStyles';
 import Linkify from 'react-linkify';
+import useStyles from './useStyles';
+
 export default function DescriptionBox(props) {
   const [open, setOpen] = useState(false);
   const [btnText, setBtnText] = useState('SHOW MORE');
@@ -37,14 +38,12 @@ export default function DescriptionBox(props) {
           ))
         }
       </div>
-      <Link
-        component="button"
+      <Button
         onClick={toggle}
-        underline="none"
         className={classes.showMore}
       >
         {btnText}
-      </Link>
+      </Button>
     </Typography>
   );
 }
