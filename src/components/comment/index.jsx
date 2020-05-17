@@ -31,7 +31,7 @@ export default function Comment(props) {
 
   useEffect(() => {
     const height = get(ref, 'current.clientHeight', 0);
-    setIsLongComment(height >= 80);
+    setIsLongComment(height >= 95);
   }, [ref]);
 
   return (
