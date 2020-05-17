@@ -8,7 +8,7 @@ import useStyles from './useStyles';
 export default function VideoInfo(props) {
   const classes = useStyles();
   const {
-    title, date, userImage, userName, userSubsCount,
+    title, date, userImage, userLink, userName, userSubsCount,
   } = props;
   // 2020-04-28T02:27:29Z
   const formatedDate = moment(date).format('DD MMM, YYYY');
@@ -25,7 +25,7 @@ export default function VideoInfo(props) {
       <div className={classes.channelInfo}>
         <Avatar className="avatar" src={userImage} />
         <div>
-          <Typography className="channelName" variant="h1" component="span">
+          <Typography className="channelName" variant="h1" component="a" href={userLink}>
             {userName}
           </Typography>
           <Typography className="subsCount" variant="subtitle1">

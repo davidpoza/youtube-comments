@@ -23,7 +23,9 @@ export default makeStyles((theme) => ({
       margin: '0.5em 0.5em 0.5em 0',
     },
     '& .channelName': {
-      fontWeight: 400,
+      color: 'black',
+      textDecoration: 'none',
+      fontWeight: 500,
       fontSize: '1em',
       margin: '0.4em 0 0.2em 0',
     },

@@ -23,7 +23,6 @@ export function fetchComments(dispatch, { videoId, keywords }) {
         search.videoTitle = get(data.items[0], 'snippet.title');
         search.videoDescription = get(data.items[0], 'snippet.description');
         search.videoDate = get(data.items[0], 'snippet.publishedAt');
-        search.userLink = `https://youtube.com/channel/${get(data.items[0], 'snippet.channelId')}/videos`;
         search.userName = get(data.items[0], 'snippet.channelTitle');
         search.imageLink = get(data.items[0], 'snippet.thumbnails.default.url');
         search.imageWidth = get(data.items[0], 'snippet.thumbnails.default.width');
@@ -61,6 +60,7 @@ export function fetchComments(dispatch, { videoId, keywords }) {
     .then((data) => {
       search.userImage = get(data.items[0], 'snippet.thumbnails.default.url');
       search.userSubs = get(data.items[0], 'statistics.subscriberCount');
+      search.userLink = `https://youtube.com/channel/${get(data.items[0], 'id')}/videos`;
       dispatch({
         type: 'GET_COMMENTS_SUCCESS',
         payload: search,

@@ -30,6 +30,7 @@ function ResultsScreen() {
             date={search.videoDate}
             title={search.videoTitle}
             userImage={search.userImage}
+            userLink={search.userLink}
             userName={search.userName}
             userSubsCount={formatSubsCount(search.userSubs)}
           />
