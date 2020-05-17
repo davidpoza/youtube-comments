@@ -7,10 +7,12 @@ import VideoPlayer from '../video-player';
 import VideoInfo from '../video-info';
 import DescriptionBox from '../description-box';
 import { formatSubsCount } from '../helpers/utils';
+import useStyles from './useStyles';
 import Comment from '../comment';
 import Replies from '../replies';
 
 function ResultsScreen() {
+  const classes = useStyles();
   const { searchId } = useParams();
   const [state, dispatch] = useContext(Store);
   const search = state.history[searchId];
@@ -31,7 +33,7 @@ function ResultsScreen() {
             userSubsCount={formatSubsCount(search.userSubs)}
           />
           <DescriptionBox text={search.videoDescription} />
-          <div>
+          <div className={classes.commentsBlock}>
             {
               search.comments.map((c) => (
                 <div>
