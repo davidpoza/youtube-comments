@@ -1,13 +1,11 @@
 import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
-import get from 'lodash.get';
-import moment from 'moment';
 import Store from '../../reducers/store';
 import VideoPlayer from '../video-player';
 import VideoInfo from '../video-info';
 import DescriptionBox from '../description-box';
-import { formatSubsCount } from '../helpers/utils';
+import { formatSubsCount, sortCommentsByDate } from '../helpers/utils';
 import useStyles from './useStyles';
 import Comment from '../comment';
 import Replies from '../replies';
@@ -38,17 +36,7 @@ function ResultsScreen() {
           <div className={classes.commentsBlock}>
             {
               search.comments
-                .sort((a, b) => {
-                  const dateA = moment(a.publishedDate);
-                  const dateB = moment(b.publishedDate);
-                  if (dateA.isBefore(dateB)) {
-                    return (-1);
-                  }
-                  if (dateB.isBefore(dateA)) {
-                    return (1);
-                  }
-                  return (0);
-                })
+                .sort(sortCommentsByDate)
                 .map((c) => (
                   <div key={c.id}>
                     <Comment

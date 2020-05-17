@@ -10,6 +10,18 @@ import Store from '../../reducers/store';
 import useStyles from './useStyles';
 import DrawerItem from '../drawer-item';
 
+function sortByDate(a, b) {
+  const date1 = moment(a.date, 'DD-MM-YYYY HH:mm');
+  const date2 = moment(b.date, 'DD-MM-YYYY HH:mm');
+  if (date1.isBefore(date2)) {
+    return (1);
+  }
+  if (date2.isBefore(date1)) {
+    return (-1);
+  }
+  return (0);
+}
+
 export default function Drawer() {
   const classes = useStyles();
   const [state, dispatch] = useContext(Store);
@@ -24,17 +36,7 @@ export default function Drawer() {
       {
         Object.keys(state.history)
           .map((id) => (state.history[id]))
-          .sort((a, b) => {
-            const date1 = moment(a.date, 'DD-MM-YYYY HH:mm');
-            const date2 = moment(b.date, 'DD-MM-YYYY HH:mm');
-            if (date1.isBefore(date2)) {
-              return (1);
-            }
-            if (date2.isBefore(date1)) {
-              return (-1);
-            }
-            return (0);
-          })
+          .sort(sortByDate)
           .map((obj) => (
             <DrawerItem
               id={get(obj, 'id')}

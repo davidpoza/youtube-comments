@@ -1,23 +1,13 @@
 import React from 'react';
-import moment from 'moment';
 import Comment from '../comment';
+import { sortCommentsByDate } from '../helpers/utils';
 
 export default function Replies(props) {
   const { replies } = props;
   if (replies) {
     return (
       replies
-        .sort((a, b) => {
-          const dateA = moment(a.publishedDate);
-          const dateB = moment(b.publishedDate);
-          if (dateA.isBefore(dateB)) {
-            return (-1);
-          }
-          if (dateB.isBefore(dateA)) {
-            return (1);
-          }
-          return (0);
-        })
+        .sort(sortCommentsByDate)
         .map((r) => (
           <Comment
             key={r.id}
