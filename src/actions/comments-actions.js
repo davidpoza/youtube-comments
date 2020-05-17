@@ -36,6 +36,7 @@ export function fetchComments(dispatch, { videoId, keywords }) {
       search.totalResults = get(data, 'pageInfo.totalResults');
       search.comments = data.items.map((c) => {
         const comment = createComment({
+          id: get(c, 'id'),
           text: get(c, 'snippet.topLevelComment.snippet.textOriginal'),
           authorName: get(c, 'snippet.topLevelComment.snippet.authorDisplayName'),
           authorImage: get(c, 'snippet.topLevelComment.snippet.authorProfileImageUrl'),
@@ -44,6 +45,7 @@ export function fetchComments(dispatch, { videoId, keywords }) {
         });
         comment.replies = get(c, 'replies.comments').map((r) => {
           const reply = createComment({
+            id: get(r, 'id'),
             text: get(r, 'snippet.textOriginal'),
             authorName: get(r, 'snippet.authorDisplayName'),
             authorImage: get(r, 'snippet.authorProfileImageUrl'),

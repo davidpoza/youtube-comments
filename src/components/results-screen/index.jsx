@@ -49,8 +49,9 @@ function ResultsScreen() {
                   return (0);
                 })
                 .map((c) => (
-                  <div>
+                  <div key={c.id}>
                     <Comment
+                      key={c.id}
                       text={c.text}
                       authorImage={c.authorImage}
                       authorName={c.authorName}

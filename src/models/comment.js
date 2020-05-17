@@ -1,4 +1,5 @@
 export default function createComment({
+  id,
   authorImage,
   authorName,
   authorUrl,
@@ -8,6 +9,7 @@ export default function createComment({
   text,
 }) {
   return ({
+    id,
     authorImage,
     authorName,
     authorUrl,

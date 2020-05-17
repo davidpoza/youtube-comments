@@ -20,6 +20,7 @@ export default function Replies(props) {
         })
         .map((r) => (
           <Comment
+            key={r.id}
             isReply
             text={r.text}
             authorImage={r.authorImage}
