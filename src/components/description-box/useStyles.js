@@ -8,7 +8,7 @@ export default makeStyles({
     fontSize: '0.9em',
   },
   dropDown: {
-    height: '4.2em',
+    height: '4em',
     overflow: 'hidden',
     '& a:link, & a:visited': {
       color: '#2e79da',
