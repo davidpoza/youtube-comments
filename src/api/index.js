@@ -13,33 +13,39 @@ export default {
     search(videoId, keywords) {
       const q = [
         config.apiBaseUrl,
-        'part=replies,snippet',
+        'commentThreads',
+        `?key=${process.env.REACT_APP_API_KEY}&`,
+        'part=id,replies,snippet',
         `&videoId=${videoId}`,
         '&textFormat=plainText',
         '&maxResults=100',
         `&searchTerms=${keywords}`, // TODO: encode
       ].join('');
-      return (Promise.resolve(mockSearchComments));
+      return (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve(mockSearchComments) : fetch(q));
     },
   },
   videos: {
     list(videoId) {
       const q = [
         config.apiBaseUrl,
+        'videos',
+        `?key=${process.env.REACT_APP_API_KEY}&`,
         'part=snippet',
         `&id=${videoId}`,
       ].join('');
-      return (Promise.resolve(mockListVideos));
+      return (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve(mockListVideos) : fetch(q));
     },
   },
   channels: {
     list(channelId) {
       const q = [
         config.apiBaseUrl,
-        'part=snippet',
+        'channels',
+        `?key=${process.env.REACT_APP_API_KEY}&`,
+        'part=snippet,statistics',
         `&id=${channelId}`,
       ].join('');
-      return (Promise.resolve(mockListChannels));
+      return (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve(mockListChannels) : fetch(q));
     },
   },
 };

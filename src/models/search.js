@@ -6,6 +6,7 @@ export default function createSearch({
   totalResults = 0,
   userName, // channel name
   userLink, // chanel link
+  channelId,
   userImage, // link to channel avatar
   userSubs, // suscribers count
   imageLink,
@@ -24,6 +25,7 @@ export default function createSearch({
     totalResults,
     userName,
     userLink,
+    channelId,
     imageLink,
     userImage,
     userSubs,
