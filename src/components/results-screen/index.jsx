@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Store from '../../reducers/store';
 import VideoPlayer from '../video-player';
@@ -19,41 +20,49 @@ function ResultsScreen() {
 
   if (search) {
     return (
-      <div>
-        <VideoPlayer
-          videoId={search.videoId}
-        />
-        <Container maxWidth="lg">
-          <VideoInfo
-            date={search.videoDate}
-            title={search.videoTitle}
-            userImage={search.userImage}
-            userLink={search.userLink}
-            userName={search.userName}
-            userSubsCount={formatSubsCount(search.userSubs)}
+      <Grid
+        container
+        spacing={0}
+        alignItems="start"
+        justify="center"
+        style={{ minHeight: '100vh' }}
+      >
+        <Grid item xs={12} lg={6}>
+          <VideoPlayer
+            videoId={search.videoId}
           />
-          <DescriptionBox text={search.videoDescription} />
-          <div className={classes.commentsBlock}>
-            {
-              search.comments
-                .sort(sortCommentsByDate)
-                .map((c) => (
-                  <div key={c.id}>
-                    <Comment
-                      key={c.id}
-                      text={c.text}
-                      authorImage={c.authorImage}
-                      authorName={c.authorName}
-                      authorUrl={c.authorUrl}
-                      publishedDate={c.publishedDate}
-                    />
-                    <Replies replies={c.replies} />
-                  </div>
-                ))
-            }
-          </div>
-        </Container>
-      </div>
+          <Container maxWidth="lg">
+            <VideoInfo
+              date={search.videoDate}
+              title={search.videoTitle}
+              userImage={search.userImage}
+              userLink={search.userLink}
+              userName={search.userName}
+              userSubsCount={formatSubsCount(search.userSubs)}
+            />
+            <DescriptionBox text={search.videoDescription} />
+            <div className={classes.commentsBlock}>
+              {
+                search.comments
+                  .sort(sortCommentsByDate)
+                  .map((c) => (
+                    <div key={c.id}>
+                      <Comment
+                        key={c.id}
+                        text={c.text}
+                        authorImage={c.authorImage}
+                        authorName={c.authorName}
+                        authorUrl={c.authorUrl}
+                        publishedDate={c.publishedDate}
+                      />
+                      <Replies replies={c.replies} />
+                    </div>
+                  ))
+              }
+            </div>
+          </Container>
+        </Grid>
+      </Grid>
     );
   }
   return (null);
