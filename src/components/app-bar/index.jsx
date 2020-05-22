@@ -19,8 +19,14 @@ export default function MyAppBar(props) {
   return (
     <AppBar position="static">
       <Toolbar>
-        <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-          <MenuIcon onClick={toggleDrawer} />
+        <IconButton
+          aria-label="menu"
+          className={classes.menuButton}
+          color="inherit"
+          edge="start"
+          onClick={toggleDrawer}
+        >
+          <MenuIcon />
         </IconButton>
         <Typography variant="h6" className={classes.title}>
           Youtube Comments

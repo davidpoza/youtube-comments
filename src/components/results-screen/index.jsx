@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -11,10 +11,13 @@ import { formatSubsCount, sortCommentsByDate } from '../helpers/utils';
 import useStyles from './useStyles';
 import Comment from '../comment';
 import Replies from '../replies';
+import Pagination from '../pagination';
+import Config from '../../config';
 
 function ResultsScreen() {
   const classes = useStyles();
-  const { searchId } = useParams();
+  const { searchId, pag } = useParams();
+  const pagInt = pag ? parseInt(pag, 10) : 1;
   const [state, dispatch] = useContext(Store);
   const search = state.history[searchId];
   console.log(search)
@@ -24,7 +27,7 @@ function ResultsScreen() {
       <Grid
         container
         spacing={0}
-        alignItems="start"
+        alignItems="flex-start"
         justify="center"
         style={{ minHeight: '100vh' }}
       >
@@ -53,6 +56,7 @@ function ResultsScreen() {
               {
                 search.comments
                   .sort(sortCommentsByDate)
+                  .slice((pagInt - 1) * Config.commentsPerPage, pagInt * Config.commentsPerPage)
                   .map((c) => (
                     <div key={c.id}>
                       <Comment
@@ -68,6 +72,7 @@ function ResultsScreen() {
                   ))
               }
             </div>
+            <Pagination commentCount={search.comments.length} className={classes.pagination} />
           </Container>
         </Grid>
       </Grid>

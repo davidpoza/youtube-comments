@@ -13,7 +13,7 @@ function App() {
       <Drawer drawerIsOpen={open} setDrawerOpen={setOpen} />
       <Router>
         <Route exact path="/" component={SearchScreen} />
-        <Route path="/results/:searchId" component={ResultsScreen} />
+        <Route path="/results/:searchId/:pag?" component={ResultsScreen} />
       </Router>
     </>
   );
