@@ -32,4 +32,10 @@ export default makeStyles({
       backgroundColor: 'transparent',
     },
   },
+  title: {
+    flexGrow: 1,
+  },
+  search: {
+    color: 'white',
+  },
 });

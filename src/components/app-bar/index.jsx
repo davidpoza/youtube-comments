@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import SearchIcon from '@material-ui/icons/Search';
 import useStyles from './useStyles';
 
 export default function MyAppBar(props) {
@@ -24,6 +25,9 @@ export default function MyAppBar(props) {
         <Typography variant="h6" className={classes.title}>
           Youtube Comments
         </Typography>
+        <IconButton aria-label="search" className={classes.search} href="/">
+          <SearchIcon />
+        </IconButton>
       </Toolbar>
     </AppBar>
   );
