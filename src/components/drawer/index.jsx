@@ -1,4 +1,5 @@
 import React, { useContext, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import get from 'lodash.get';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
@@ -22,14 +23,14 @@ function sortByDate(a, b) {
   return (0);
 }
 
-export default function Drawer() {
+export default function Drawer(props) {
+  const { drawerIsOpen, setDrawerOpen } = props;
   const classes = useStyles();
   const [state, dispatch] = useContext(Store);
-  const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = useCallback(() => {
-    setOpen(!open);
-  }, [open]);
+    setDrawerOpen(!drawerIsOpen);
+  }, [drawerIsOpen]);
 
   const list = () => (
     <List className={classes.list}>
@@ -59,7 +60,7 @@ export default function Drawer() {
     <div>
       <SwipeableDrawer
         anchor="left"
-        open={open}
+        open={drawerIsOpen}
         onClose={toggleDrawer}
         onOpen={toggleDrawer}
       >
@@ -68,9 +69,11 @@ export default function Drawer() {
         </Typography>
         {list()}
       </SwipeableDrawer>
-      <IconButton color="primary" onClick={toggleDrawer}>
-        <MenuIcon />
-      </IconButton>
     </div>
   );
 }
+
+Drawer.propTypes = {
+  setDrawerOpen: PropTypes.func,
+  drawerIsOpen: PropTypes.bool,
+};

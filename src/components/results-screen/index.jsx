@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
 import Store from '../../reducers/store';
 import VideoPlayer from '../video-player';
 import VideoInfo from '../video-info';
@@ -41,6 +42,13 @@ function ResultsScreen() {
               userSubsCount={formatSubsCount(search.userSubs)}
             />
             <DescriptionBox text={search.videoDescription} />
+            <div>
+              <Typography className={classes.commentCounter} variant="subtitle1">
+                {
+                  `${search.comments.length} Comments`
+                }
+              </Typography>
+            </div>
             <div className={classes.commentsBlock}>
               {
                 search.comments
