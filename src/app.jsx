@@ -9,9 +9,9 @@ function App() {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <AppBar drawerIsOpen={open} setDrawerOpen={setOpen} />
-      <Drawer drawerIsOpen={open} setDrawerOpen={setOpen} />
       <Router>
+        <AppBar drawerIsOpen={open} setDrawerOpen={setOpen} />
+        <Drawer drawerIsOpen={open} setDrawerOpen={setOpen} />
         <Route exact path="/" component={SearchScreen} />
         <Route path="/results/:searchId/:pag?" component={ResultsScreen} />
       </Router>

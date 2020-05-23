@@ -6,14 +6,16 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import PersonIcon from '@material-ui/icons/Person';
+import { useLocation } from 'react-router-dom';
 import useStyles from './useStyles';
 
 export default function MyAppBar(props) {
   const { drawerIsOpen, setDrawerOpen } = props;
+  const location = useLocation();
   const toggleDrawer = useCallback(() => {
     setDrawerOpen(!drawerIsOpen);
   }, [drawerIsOpen]);
-
 
   const classes = useStyles();
   return (
@@ -31,9 +33,16 @@ export default function MyAppBar(props) {
         <Typography variant="h6" className={classes.title}>
           Youtube Comments
         </Typography>
-        <IconButton aria-label="search" className={classes.search} href="/">
-          <SearchIcon />
+        <IconButton title="Login" aria-label="login" className={classes.search}>
+          <PersonIcon />
         </IconButton>
+        {
+          location.pathname !== '/' && (
+            <IconButton title="Go homepage" aria-label="search" className={classes.search} href="/">
+              <SearchIcon />
+            </IconButton>
+          )
+        }
       </Toolbar>
     </AppBar>
   );
