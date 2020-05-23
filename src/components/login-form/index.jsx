@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -12,6 +12,8 @@ import useStyles from './useStyles';
 export default function LoginForm(props) {
   const classes = useStyles();
   const { formIsOpen, setFormOpen, setRegisterFormOpen } = props;
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
 
   const handleClose = () => {
     setFormOpen(false);
@@ -40,14 +42,26 @@ export default function LoginForm(props) {
             </Button>
           </DialogContentText>
           <TextField
+            onChange={
+              (e) => {
+                setEmail(e.target.value);
+              }
+            }
+            value={email}
             autoFocus
             margin="dense"
-            id="name"
+            id="email"
             label="Email Address"
             type="email"
             fullWidth
           />
           <TextField
+            onChange={
+              (e) => {
+                setPassword(e.target.value);
+              }
+            }
+            value={password}
             margin="dense"
             id="password"
             label="Password"
@@ -59,7 +73,11 @@ export default function LoginForm(props) {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button
+            disabled={password === '' || email === ''}
+            onClick={handleClose}
+            color="primary"
+          >
             Login
           </Button>
         </DialogActions>

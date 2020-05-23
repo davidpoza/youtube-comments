@@ -7,6 +7,27 @@ export function videoUrlIsValid(url) {
   return (result ? result[1] : false);
 }
 
+export function emailIsValid(email) {
+  // eslint-disable-next-line max-len
+  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}
+
+
+export function passwordIsValid(password) {
+  if (password.length < 8) {
+    return (false);
+  }
+  const hasUpperCase = /[A-Z]/.test(password);
+  const hasLowerCase = /[a-z]/.test(password);
+  const hasNumbers = /\d/.test(password);
+  const hasNonalphas = /\W/.test(password);
+  if (hasUpperCase + hasLowerCase + hasNumbers + hasNonalphas < 3) {
+    return (false);
+  }
+  return (true);
+}
+
 export function formatSubsCount(subs) {
   if (subs >= 1000000) {
     return (`${subs / 1000000}M`);
