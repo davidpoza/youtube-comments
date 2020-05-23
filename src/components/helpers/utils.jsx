@@ -21,10 +21,10 @@ export function sortCommentsByDate(a, b) {
   const dateA = moment(a.publishedDate);
   const dateB = moment(b.publishedDate);
   if (dateA.isBefore(dateB)) {
-    return (-1);
+    return (1);
   }
   if (dateB.isBefore(dateA)) {
-    return (1);
+    return (-1);
   }
   return (0);
 }
