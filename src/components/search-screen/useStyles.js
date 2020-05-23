@@ -6,7 +6,8 @@ export default makeStyles(() => ({
     minWidth: '100%',
     '& img': {
       width: '60%',
-      marginBottom: '20px',
+      marginBottom: '2em',
+      marginTop: '3em',
     },
   },
 }));
