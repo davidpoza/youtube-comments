@@ -5,14 +5,21 @@ import SearchScreen from './components/search-screen';
 import ResultsScreen from './components/results-screen';
 import AppBar from './components/app-bar';
 import LoginForm from './components/login-form';
+import RegisterForm from './components/register-form';
 
 function App() {
   const [drawerIsOpen, setOpenDrawer] = useState(false);
   const [loginFormIsOpen, setLoginFormOpen] = useState(false);
+  const [registerFormIsOpen, setRegisterFormOpen] = useState(false);
   return (
     <>
       <Router>
-        <LoginForm formIsOpen={loginFormIsOpen} setFormOpen={setLoginFormOpen} />
+        <LoginForm
+          formIsOpen={loginFormIsOpen}
+          setFormOpen={setLoginFormOpen}
+          setRegisterFormOpen={setRegisterFormOpen}
+        />
+        <RegisterForm formIsOpen={registerFormIsOpen} setFormOpen={setRegisterFormOpen} />
         <AppBar drawerIsOpen={drawerIsOpen} setDrawerOpen={setOpenDrawer} setLoginFormOpen={setLoginFormOpen} />
         <Drawer drawerIsOpen={drawerIsOpen} setDrawerOpen={setOpenDrawer} />
         <Route exact path="/" component={SearchScreen} />

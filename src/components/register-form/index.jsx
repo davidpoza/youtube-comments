@@ -7,37 +7,21 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import useStyles from './useStyles';
 
-export default function LoginForm(props) {
-  const classes = useStyles();
-  const { formIsOpen, setFormOpen, setRegisterFormOpen } = props;
+export default function RegisterForm(props) {
+  const { formIsOpen, setFormOpen } = props;
 
   const handleClose = () => {
     setFormOpen(false);
   };
 
-  const handleOpenRegisterForm = () => {
-    setFormOpen(false);
-    setRegisterFormOpen(true);
-  };
-
   return (
     <div>
       <Dialog open={formIsOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Login</DialogTitle>
+        <DialogTitle id="form-dialog-title">Create new account</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To access search functionallity you have to be logged in.
-          </DialogContentText>
-          <DialogContentText>
-            Do you have no account?, create one
-            <Button
-              onClick={handleOpenRegisterForm}
-              className={classes.createAccount}
-            >
-              here
-            </Button>
+            If you don&apos;t have an account, you can create one by filling-in this form.
           </DialogContentText>
           <TextField
             autoFocus
@@ -54,13 +38,20 @@ export default function LoginForm(props) {
             type="password"
             fullWidth
           />
+          <TextField
+            margin="dense"
+            id="password"
+            label="Repeat password"
+            type="password"
+            fullWidth
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
           <Button onClick={handleClose} color="primary">
-            Login
+            Register
           </Button>
         </DialogActions>
       </Dialog>
@@ -68,8 +59,7 @@ export default function LoginForm(props) {
   );
 }
 
-LoginForm.propTypes = {
+RegisterForm.propTypes = {
   formIsOpen: PropTypes.bool,
   setFormOpen: PropTypes.func,
-  setRegisterFormOpen: PropTypes.func,
 };
