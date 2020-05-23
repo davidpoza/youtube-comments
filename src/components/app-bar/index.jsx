@@ -11,11 +11,14 @@ import { useLocation } from 'react-router-dom';
 import useStyles from './useStyles';
 
 export default function MyAppBar(props) {
-  const { drawerIsOpen, setDrawerOpen } = props;
+  const { drawerIsOpen, setDrawerOpen, setLoginFormOpen } = props;
   const location = useLocation();
   const toggleDrawer = useCallback(() => {
     setDrawerOpen(!drawerIsOpen);
   }, [drawerIsOpen]);
+  const openLoginForm = useCallback(() => {
+    setLoginFormOpen(true);
+  });
 
   const classes = useStyles();
   return (
@@ -33,12 +36,22 @@ export default function MyAppBar(props) {
         <Typography variant="h6" className={classes.title}>
           Youtube Comments
         </Typography>
-        <IconButton title="Login" aria-label="login" className={classes.search}>
+        <IconButton
+          onClick={openLoginForm}
+          title="Login"
+          aria-label="login"
+          className={classes.search}
+        >
           <PersonIcon />
         </IconButton>
         {
           location.pathname !== '/' && (
-            <IconButton title="Go homepage" aria-label="search" className={classes.search} href="/">
+            <IconButton
+              title="Go homepage"
+              aria-label="home"
+              className={classes.search}
+              href="/"
+            >
               <SearchIcon />
             </IconButton>
           )
@@ -51,4 +64,5 @@ export default function MyAppBar(props) {
 MyAppBar.propTypes = {
   setDrawerOpen: PropTypes.func,
   drawerIsOpen: PropTypes.bool,
+  setLoginFormOpen: PropTypes.func,
 };
