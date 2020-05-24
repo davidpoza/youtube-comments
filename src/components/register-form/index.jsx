@@ -15,7 +15,7 @@ export default function RegisterForm(props) {
   const classes = useStyles();
   const { formIsOpen, setFormOpen } = props;
   const [msg, setMsg] = useState('');
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(true);
   const [password, setPassword] = useState('');
   const [repeatedPassword, setRepeatedPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -27,33 +27,24 @@ export default function RegisterForm(props) {
   const validate = useCallback(() => {
     if (email === '' && password === '' && repeatedPassword === '') {
       setMsg('');
-      setError(false);
-      return (true);
-    }
-    if (!emailIsValid(email)) {
+      setError(true);
+    } else if (!emailIsValid(email)) {
       setError(true);
       setMsg('Email address is not valid.');
-      return (false);
-    }
-    if (password !== repeatedPassword) {
+    } else if (password !== repeatedPassword) {
       setError(true);
       setMsg('Passwords don\'t match');
-      return (false);
-    }
-    if (password !== '' && !passwordIsValid(password)) {
+    } else if (password !== '' && !passwordIsValid(password)) {
       setError(true);
       // eslint-disable-next-line max-len
-      setMsg('Password must have at least: 8 characters length, one upper case, one lower case, one number and one no-alphanumeric character.');
-      return (false);
-    }
-    if ((email === '' || password === '' || repeatedPassword === '')) {
+      setMsg('Password must have at least 8 characters length and at least 3 characters from these subsets: upper cases letters, lower case letters, numbers or no-alphanumerics symbols.');
+    } else if ((email === '' || password === '' || repeatedPassword === '')) {
       setError(true);
       setMsg('You must fill-in all fields');
-      return (false);
+    } else {
+      setError(false);
+      setMsg('');
     }
-    setError(false);
-    setMsg('');
-    return (true);
   });
 
   useEffect(() => {
