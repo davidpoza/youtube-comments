@@ -40,8 +40,9 @@ export default function Drawer(props) {
           .sort(sortByDate)
           .map((obj) => (
             <DrawerItem
-              id={get(obj, 'id')}
+              commentCount={get(obj, 'comments', []).length}
               date={get(obj, 'date')}
+              id={get(obj, 'id')}
               imageUrl={get(obj, 'imageLink')}
               key={get(obj, 'id')}
               keywords={get(obj, 'keywords')}

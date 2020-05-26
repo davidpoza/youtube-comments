@@ -24,6 +24,7 @@ export default function DrawerItem(props) {
     userName,
     videoId,
     videoLink,
+    commentCount,
   } = props;
   const classes = useStyles();
   const [state, dispatch] = useContext(Store);
@@ -82,7 +83,7 @@ export default function DrawerItem(props) {
                 color="textPrimary"
                 component="span"
               >
-                {keywords}
+                {`${keywords} | ${commentCount} comments`}
               </Typography>
             </>
           )}
@@ -94,8 +95,9 @@ export default function DrawerItem(props) {
 }
 
 DrawerItem.propTypes = {
-  id: PropTypes.string,
+  commentCount: PropTypes.number,
   date: PropTypes.string,
+  id: PropTypes.string,
   imageHeight: PropTypes.number,
   imageUrl: PropTypes.string,
   imageWidth: PropTypes.number,
