@@ -1,4 +1,4 @@
 export default {
-  apiBaseUrl: 'https://www.googleapis.com/youtube/v3/',
+  youtubeApiUrl: 'https://www.googleapis.com/youtube/v3/',
   commentsPerPage: 10,
 };

@@ -7,14 +7,66 @@ import mockListChannels from './mocks/list-channel';
 
 export default {
   user: {
-
+    login(email, password) {
+      const q = [
+        process.env.REACT_APP_API_URL,
+        '/api/auth',
+        '/authenticate',
+      ].join('');
+      const opt = {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      };
+      return (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve({}) : fetch(q, opt));
+    },
+    register(email, password) {
+      const q = [
+        process.env.REACT_APP_API_URL,
+        '/api/auth',
+        '/register',
+      ].join('');
+      const opt = {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      };
+      return (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve({}) : fetch(q, opt));
+    },
+    getUserInfo(token) {
+      const q = [
+        process.env.REACT_APP_API_URL,
+        '/api/users/me',
+      ].join('');
+      const opt = {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      return (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve({}) : fetch(q, opt));
+    },
   },
   comments: {
     search(videoId, keywords) {
       const q = [
-        config.apiBaseUrl,
+        process.env.REACT_APP_API_URL,
         'commentThreads',
-        `?key=${process.env.REACT_APP_API_KEY}&`,
+        `?key=${process.env.REACT_APP_API_URL}&`,
         'part=id,replies,snippet',
         `&videoId=${videoId}`,
         '&textFormat=plainText',
@@ -27,7 +79,7 @@ export default {
   videos: {
     list(videoId) {
       const q = [
-        config.apiBaseUrl,
+        process.env.REACT_APP_API_URL,
         'videos',
         `?key=${process.env.REACT_APP_API_KEY}&`,
         'part=snippet',
@@ -39,7 +91,7 @@ export default {
   channels: {
     list(channelId) {
       const q = [
-        config.apiBaseUrl,
+        process.env.REACT_APP_API_URL,
         'channels',
         `?key=${process.env.REACT_APP_API_KEY}&`,
         'part=snippet,statistics',
