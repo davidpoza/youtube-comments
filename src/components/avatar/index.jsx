@@ -24,7 +24,7 @@ export default function MyAvatar(props) {
         <Avatar
           onClick={handleClick}
           className={classes.avatar}
-          src={`${process.env.REACT_APP_API_URL}/users/avatar/${userId}`}
+          src={`${process.env.REACT_APP_API_URL}/api/users/avatar/${userId}`}
         />
         <Menu
           id="simple-menu"
