@@ -43,4 +43,10 @@ export function login(dispatch, { email, password }) {
       });
     });
 }
+
+export function logout(dispatch) {
+  dispatch({
+    type: 'LOGOUT',
+  });
+}
 /* eslint-enable import/prefer-default-export */

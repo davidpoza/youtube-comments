@@ -13,6 +13,10 @@ export default function reducer(state, action) {
       return {
         ...state, loading: false, error: true, msg: action.payload.msg,
       };
+    case 'LOGOUT':
+      return {
+        ...state, loading: false, error: false, user: undefined,
+      };
     case 'GET_COMMENTS_ATTEMPT':
       return {
         ...state, loading: true, error: false, lastSearchId: undefined,

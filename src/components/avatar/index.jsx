@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Avatar from '@material-ui/core/Avatar';
 import useStyles from './useStyles';
+import Store from '../../reducers/store';
+import { logout } from '../../actions/user-actions';
 
 export default function MyAvatar(props) {
+  const [state, dispatch] = useContext(Store);
   const classes = useStyles();
   const { userId } = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -16,6 +19,11 @@ export default function MyAvatar(props) {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    handleClose();
+    logout(dispatch);
   };
 
   if (userId) {
@@ -33,7 +41,7 @@ export default function MyAvatar(props) {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose}>Logout</MenuItem>
+          <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
       </>
     );
