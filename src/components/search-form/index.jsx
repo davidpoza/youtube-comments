@@ -1,4 +1,5 @@
 import React, { useState, useContext, useCallback } from 'react';
+import get from 'lodash.get';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
@@ -16,7 +17,7 @@ function SearchFrom() {
 
   const makeRequest = useCallback(() => {
     if (videoId && keywords !== '') {
-      fetchComments(dispatch, { videoId, keywords });
+      fetchComments(dispatch, { videoId, keywords, token: get(state, 'user.token') });
     }
   }, [state, dispatch, videoId, keywords]);
   const classes = useStyles();

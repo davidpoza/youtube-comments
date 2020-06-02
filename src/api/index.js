@@ -62,42 +62,59 @@ export default {
     },
   },
   comments: {
-    search(videoId, keywords) {
+    search(videoId, keywords, token) {
       const q = [
         process.env.REACT_APP_API_URL,
-        'commentThreads',
-        `?key=${process.env.REACT_APP_API_URL}&`,
-        'part=id,replies,snippet',
-        `&videoId=${videoId}`,
-        '&textFormat=plainText',
-        '&maxResults=100',
-        `&searchTerms=${keywords}`, // TODO: encode
+        '/api/videos/',
+        `${videoId}/`,
+        'comments',
+        `?keywords=${keywords}`, // TODO: encode
       ].join('');
-      return (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve(mockSearchComments) : fetch(q));
+      const opt = {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      return (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve(mockSearchComments) : fetch(q, opt));
     },
   },
   videos: {
-    list(videoId) {
+    list(videoId, token) {
       const q = [
         process.env.REACT_APP_API_URL,
-        'videos',
-        `?key=${process.env.REACT_APP_API_KEY}&`,
-        'part=snippet',
-        `&id=${videoId}`,
+        '/api/videos/',
+        `${videoId}`,
       ].join('');
-      return (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve(mockListVideos) : fetch(q));
+      const opt = {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      return (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve(mockListVideos) : fetch(q, opt));
     },
   },
   channels: {
-    list(channelId) {
+    list(channelId, token) {
       const q = [
         process.env.REACT_APP_API_URL,
-        'channels',
-        `?key=${process.env.REACT_APP_API_KEY}&`,
-        'part=snippet,statistics',
-        `&id=${channelId}`,
+        '/api/channels/',
+        `${channelId}`,
       ].join('');
-      return (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve(mockListChannels) : fetch(q));
+      const opt = {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      return (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve(mockListChannels) : fetch(q, opt));
     },
   },
 };

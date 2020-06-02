@@ -17,6 +17,7 @@ export function login(dispatch, { email, password }) {
     .then((res) => (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve(res) : res.json()))
     .then((data) => {
       if (data.data) {
+        user.token = data.data.token;
         return (api.user.getUserInfo(data.data.token));
       }
       if (data.error) {
