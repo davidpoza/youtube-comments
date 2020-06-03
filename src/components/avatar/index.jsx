@@ -41,6 +41,7 @@ export default function MyAvatar(props) {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
+          <MenuItem className={classes.menuEmail} disabled>{state.user.email}</MenuItem>
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
       </>
