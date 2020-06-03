@@ -15,7 +15,7 @@ export default function reducer(state, action) {
       };
     case 'LOGOUT':
       return {
-        ...state, loading: false, error: false, user: undefined,
+        ...state, loading: false, error: false, user: undefined, history: {},
       };
     case 'GET_COMMENTS_ATTEMPT':
       return {
