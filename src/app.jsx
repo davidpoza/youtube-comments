@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom/';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom/';
 import Drawer from './components/drawer';
 import SearchScreen from './components/search-screen';
 import ResultsScreen from './components/results-screen';
@@ -27,9 +27,18 @@ function App() {
         <Route
           exact
           path="/"
-          render={(props) => <SearchScreen {...props} setFormOpen={setLoginFormOpen} />}
-        />
-        <Route path="/results/:searchId/:pag?" component={ResultsScreen} />
+        >
+          <SearchScreen setFormOpen={setLoginFormOpen} />
+        </Route>
+        <Route
+          path="/results/:searchId/:pag?"
+        >
+          {
+            state.user
+              ? <ResultsScreen />
+              : <Redirect to="/" />
+          }
+        </Route>
       </Router>
     </>
   );
