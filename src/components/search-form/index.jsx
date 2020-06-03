@@ -20,6 +20,8 @@ function SearchFrom(props) {
   const makeRequest = useCallback(() => {
     if (videoId && keywords !== '') {
       fetchComments(dispatch, { videoId, keywords, token: get(state, 'user.token') });
+      setVideoUrl('');
+      setKeywords('');
     }
   }, [state, dispatch, videoId, keywords]);
 

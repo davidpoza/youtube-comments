@@ -25,6 +25,8 @@ export default function LoginForm(props) {
   const handleLogin = () => {
     setFormOpen(false);
     login(dispatch, { email, password });
+    setPassword('');
+    setEmail('');
   };
 
   const handleOpenRegisterForm = () => {
@@ -69,6 +71,11 @@ export default function LoginForm(props) {
                 setPassword(e.target.value);
               }
             }
+            onKeyPress={(e) => {
+              if (e.key === 'Enter' && password !== '') {
+                handleLogin();
+              }
+            }}
             value={password}
             margin="dense"
             id="password"
