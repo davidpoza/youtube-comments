@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import { useHistory } from 'react-router-dom';
 import AlertBar from '../alert-bar';
@@ -7,7 +8,8 @@ import Store from '../../reducers/store';
 import useStyles from './useStyles';
 
 
-function SearchScreen() {
+function SearchScreen(props) {
+  const { setFormOpen } = props;
   const [state, dispatch] = useContext(Store);
   const classes = useStyles();
   const history = useHistory();
@@ -29,7 +31,7 @@ function SearchScreen() {
         <div className={classes.logo}>
           <img alt="youtube logo" src={`${process.env.PUBLIC_URL}/youtube-logo.png`} />
         </div>
-        <SearchForm />
+        <SearchForm setFormOpen={setFormOpen} />
         <AlertBar msg={state.msg} error={state.error} />
       </Grid>
     </Grid>
@@ -37,3 +39,7 @@ function SearchScreen() {
 }
 
 export default SearchScreen;
+
+SearchScreen.propTypes = {
+  setFormOpen: PropTypes.func,
+};

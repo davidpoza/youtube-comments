@@ -50,4 +50,5 @@ export function logout(dispatch) {
     type: 'LOGOUT',
   });
 }
+
 /* eslint-enable import/prefer-default-export */
