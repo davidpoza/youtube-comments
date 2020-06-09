@@ -1,6 +1,22 @@
 export default function reducer(state, action) {
   const newHistory = { ...state.history };
   switch (action.type) {
+    case 'LOGIN_ATTEMPT':
+      return {
+        ...state, user: undefined, loading: true, error: false,
+      };
+    case 'LOGIN_SUCCESS':
+      return {
+        ...state, loading: false, user: action.payload,
+      };
+    case 'LOGIN_FAIL':
+      return {
+        ...state, loading: false, error: true, msg: action.payload.msg,
+      };
+    case 'LOGOUT':
+      return {
+        ...state, loading: false, error: false, user: undefined, history: {},
+      };
     case 'GET_COMMENTS_ATTEMPT':
       return {
         ...state, loading: true, error: false, lastSearchId: undefined,

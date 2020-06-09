@@ -7,45 +7,114 @@ import mockListChannels from './mocks/list-channel';
 
 export default {
   user: {
-
+    login(email, password) {
+      const q = [
+        process.env.REACT_APP_API_URL,
+        '/api/auth',
+        '/authenticate',
+      ].join('');
+      const opt = {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      };
+      return (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve({}) : fetch(q, opt));
+    },
+    register(email, password) {
+      const q = [
+        process.env.REACT_APP_API_URL,
+        '/api/auth',
+        '/register',
+      ].join('');
+      const opt = {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      };
+      return (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve({}) : fetch(q, opt));
+    },
+    getUserInfo(token) {
+      const q = [
+        process.env.REACT_APP_API_URL,
+        '/api/users/me',
+      ].join('');
+      const opt = {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      return (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve({}) : fetch(q, opt));
+    },
   },
   comments: {
-    search(videoId, keywords) {
+    search(videoId, keywords, token) {
       const q = [
-        config.apiBaseUrl,
-        'commentThreads',
-        `?key=${process.env.REACT_APP_API_KEY}&`,
-        'part=id,replies,snippet',
-        `&videoId=${videoId}`,
-        '&textFormat=plainText',
-        '&maxResults=100',
-        `&searchTerms=${keywords}`, // TODO: encode
+        process.env.REACT_APP_API_URL,
+        '/api/videos/',
+        `${videoId}/`,
+        'comments',
+        `?keywords=${keywords}`, // TODO: encode
       ].join('');
-      return (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve(mockSearchComments) : fetch(q));
+      const opt = {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      return (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve(mockSearchComments) : fetch(q, opt));
     },
   },
   videos: {
-    list(videoId) {
+    list(videoId, token) {
       const q = [
-        config.apiBaseUrl,
-        'videos',
-        `?key=${process.env.REACT_APP_API_KEY}&`,
-        'part=snippet',
-        `&id=${videoId}`,
+        process.env.REACT_APP_API_URL,
+        '/api/videos/',
+        `${videoId}`,
       ].join('');
-      return (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve(mockListVideos) : fetch(q));
+      const opt = {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      return (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve(mockListVideos) : fetch(q, opt));
     },
   },
   channels: {
-    list(channelId) {
+    list(channelId, token) {
       const q = [
-        config.apiBaseUrl,
-        'channels',
-        `?key=${process.env.REACT_APP_API_KEY}&`,
-        'part=snippet,statistics',
-        `&id=${channelId}`,
+        process.env.REACT_APP_API_URL,
+        '/api/channels/',
+        `${channelId}`,
       ].join('');
-      return (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve(mockListChannels) : fetch(q));
+      const opt = {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      return (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve(mockListChannels) : fetch(q, opt));
     },
   },
 };

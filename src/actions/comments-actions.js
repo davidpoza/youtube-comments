@@ -6,7 +6,7 @@ import createSearch from '../models/search';
 import createComment from '../models/comment';
 
 /* eslint-disable import/prefer-default-export */
-export function fetchComments(dispatch, { videoId, keywords }) {
+export function fetchComments(dispatch, { videoId, keywords, token }) {
   const search = createSearch({
     id: uuid(),
     date: moment().format('DD-MM-YYYY HH:mm'),
@@ -17,7 +17,7 @@ export function fetchComments(dispatch, { videoId, keywords }) {
   dispatch({
     type: 'GET_COMMENTS_ATTEMPT',
   });
-  api.videos.list(videoId)
+  api.videos.list(videoId, token)
     .then((res) => (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve(res) : res.json()))
     .then((data) => {
       if (data.items.length > 0) {
@@ -29,7 +29,7 @@ export function fetchComments(dispatch, { videoId, keywords }) {
         search.imageLink = get(data.items[0], 'snippet.thumbnails.default.url');
         search.imageWidth = get(data.items[0], 'snippet.thumbnails.default.width');
         search.imageHeight = get(data.items[0], 'snippet.thumbnails.default.height');
-        return (api.comments.search(videoId, keywords));
+        return (api.comments.search(videoId, keywords, token));
       }
       return Promise.reject(new Error('Video does not exist'));
     })
@@ -58,7 +58,7 @@ export function fetchComments(dispatch, { videoId, keywords }) {
         });
         return (comment);
       });
-      return (api.channels.list(search.channelId, keywords));
+      return (api.channels.list(search.channelId, token));
     })
     .then((res) => (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve(res) : res.json()))
     .then((data) => {

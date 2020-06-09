@@ -1,4 +1,6 @@
 import React, { useState, useContext, useCallback } from 'react';
+import PropTypes from 'prop-types';
+import get from 'lodash.get';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
@@ -8,7 +10,8 @@ import Store from '../../reducers/store';
 import useStyles from './useStyles';
 import { fetchComments } from '../../actions/comments-actions';
 
-function SearchFrom() {
+function SearchFrom(props) {
+  const { setFormOpen } = props;
   const [state, dispatch] = useContext(Store);
   const [videoUrl, setVideoUrl] = useState('');
   const [keywords, setKeywords] = useState('');
@@ -16,9 +19,16 @@ function SearchFrom() {
 
   const makeRequest = useCallback(() => {
     if (videoId && keywords !== '') {
-      fetchComments(dispatch, { videoId, keywords });
+      fetchComments(dispatch, { videoId, keywords, token: get(state, 'user.token') });
+      setVideoUrl('');
+      setKeywords('');
     }
   }, [state, dispatch, videoId, keywords]);
+
+  const openLogin = useCallback(() => {
+    setFormOpen(true);
+  });
+
   const classes = useStyles();
 
   return (
@@ -65,7 +75,7 @@ function SearchFrom() {
           <Button
             color="primary"
             endIcon={<Icon>search</Icon>}
-            onClick={makeRequest}
+            onClick={state.user ? makeRequest : openLogin}
             size="large"
             variant="contained"
             disabled={!(videoId && keywords !== '')}
@@ -79,3 +89,7 @@ function SearchFrom() {
 }
 
 export default SearchFrom;
+
+SearchFrom.propTypes = {
+  setFormOpen: PropTypes.func,
+};

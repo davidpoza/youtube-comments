@@ -1,16 +1,21 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
+import get from 'lodash.get';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import PersonIcon from '@material-ui/icons/Person';
 import { useLocation } from 'react-router-dom';
+import Store from '../../reducers/store';
 import useStyles from './useStyles';
+import Avatar from '../avatar';
 
 export default function MyAppBar(props) {
+  const [state, dispatch] = useContext(Store);
+  const userId = get(state, 'user.id');
   const { drawerIsOpen, setDrawerOpen, setLoginFormOpen } = props;
   const location = useLocation();
   const toggleDrawer = useCallback(() => {
@@ -36,14 +41,19 @@ export default function MyAppBar(props) {
         <Typography variant="h6" className={classes.title}>
           Youtube Comments
         </Typography>
-        <IconButton
-          onClick={openLoginForm}
-          title="Login"
-          aria-label="login"
-          className={classes.search}
-        >
-          <PersonIcon />
-        </IconButton>
+        {
+          userId
+            ? <Avatar userId={userId} />
+            : (
+              <Button
+                onClick={openLoginForm}
+                title="Login"
+                className={classes.search}
+              >
+                Login
+              </Button>
+            )
+        }
         {
           location.pathname !== '/' && (
             <IconButton
