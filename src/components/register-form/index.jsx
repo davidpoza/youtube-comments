@@ -45,11 +45,11 @@ export default function RegisterForm(props) {
       setError(false);
       setMsg('');
     }
-  });
+  }, [email, password, repeatedPassword, setMsg, setError]);
 
   useEffect(() => {
     validate();
-  }, [password, repeatedPassword, email]);
+  }, [validate]);
 
   return (
     <div>

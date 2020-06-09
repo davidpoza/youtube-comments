@@ -19,7 +19,7 @@ export default function DescriptionBox(props) {
   const toggle = useCallback(() => {
     setBtnText(open ? 'SHOW MORE' : 'SHOW LESS');
     setOpen(!open);
-  });
+  }, [setBtnText, setOpen, open]);
   useEffect(() => {
     const height = get(ref, 'current.clientHeight', 0);
     setIsLongDescription(height >= 95);

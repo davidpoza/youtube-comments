@@ -30,7 +30,7 @@ export default function Drawer(props) {
 
   const toggleDrawer = useCallback(() => {
     setDrawerOpen(!drawerIsOpen);
-  }, [drawerIsOpen]);
+  }, [setDrawerOpen, drawerIsOpen]);
 
   const list = () => (
     <List className={classes.list}>

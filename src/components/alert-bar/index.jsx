@@ -19,7 +19,7 @@ export default function AlertBar({ msg, error }) {
     setTimeout(() => {
       cleanAlertBar(dispatch);
     }, 200); // to avoid showing empty bar
-  });
+  }, [setOpen, dispatch]);
   useEffect(() => {
     if (msg !== '') {
       setOpen(true);

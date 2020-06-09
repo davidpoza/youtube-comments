@@ -18,7 +18,7 @@ function SearchScreen(props) {
       history.push(`/results/${state.lastSearchId}`);
       dispatch({ type: 'CLEAN_LAST_SEARCH_ID' });
     }
-  }, [state.lastSearchId]);
+  }, [state.lastSearchId, dispatch, history]);
   return (
     <Grid
       container

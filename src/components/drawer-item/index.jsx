@@ -30,7 +30,7 @@ export default function DrawerItem(props) {
   const [state, dispatch] = useContext(Store);
   const remove = useCallback(() => {
     removeSearch(dispatch, { searchId: id });
-  });
+  }, [dispatch, id]);
   return (
     <>
       <ListItem alignItems="flex-start">

@@ -26,7 +26,7 @@ export default function Comment(props) {
   const toggle = useCallback(() => {
     setBtnText(open ? 'Read more' : 'Show less');
     setOpen(!open);
-  });
+  }, [setBtnText, setOpen, open]);
   const classes = useStyles();
 
   useEffect(() => {

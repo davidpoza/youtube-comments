@@ -20,10 +20,10 @@ export default function MyAppBar(props) {
   const location = useLocation();
   const toggleDrawer = useCallback(() => {
     setDrawerOpen(!drawerIsOpen);
-  }, [drawerIsOpen]);
+  }, [drawerIsOpen, setDrawerOpen]);
   const openLoginForm = useCallback(() => {
     setLoginFormOpen(true);
-  });
+  }, [setLoginFormOpen]);
 
   const classes = useStyles();
   return (

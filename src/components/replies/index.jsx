@@ -17,7 +17,7 @@ export default function Replies(props) {
   const toggle = useCallback(() => {
     setBtnText(open ? `View ${count} ${count > 1 ? 'replies' : 'reply'}` : 'Hide replies');
     setOpen(!open);
-  });
+  }, [setBtnText, setOpen, open, count]);
   if (replies) {
     return (
       <div>
