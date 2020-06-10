@@ -1,4 +1,6 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, {
+  useState, useCallback, useEffect, useContext,
+} from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -9,9 +11,12 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import ErrorIcon from '@material-ui/icons/Error';
 import { emailIsValid, passwordIsValid } from '../helpers/utils';
+import Store from '../../reducers/store';
 import useStyles from './useStyles';
+import { register } from '../../actions/user-actions';
 
 export default function RegisterForm(props) {
+  const [state, dispatch] = useContext(Store);
   const classes = useStyles();
   const { formIsOpen, setFormOpen } = props;
   const [msg, setMsg] = useState('');
@@ -22,6 +27,11 @@ export default function RegisterForm(props) {
 
   const handleClose = () => {
     setFormOpen(false);
+  };
+
+  const handleRegister = () => {
+    register(dispatch, { email, password });
+    handleClose();
   };
 
   const validate = useCallback(() => {
@@ -114,7 +124,7 @@ export default function RegisterForm(props) {
           </Button>
           <Button
             disabled={error}
-            onClick={handleClose}
+            onClick={handleRegister}
             color="primary"
           >
             Register

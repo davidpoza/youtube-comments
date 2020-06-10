@@ -45,6 +45,32 @@ export function login(dispatch, { email, password }) {
     });
 }
 
+export function register(dispatch, { email, password }) {
+  dispatch({
+    type: 'SIGNUP_ATTEMPT',
+  });
+  api.user.register(email, password)
+    .then((res) => (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve(res) : res.json()))
+    .then((data) => {
+      if (data.data) {
+        dispatch({
+          type: 'SIGNUP_SUCCESS',
+          payload: { msg: 'You have successfully registered' },
+        });
+      }
+      if (data.error) {
+        throw data.error;
+      }
+    })
+    .catch((err) => {
+      dispatch({
+        type: 'SIGNUP_FAIL',
+        payload: { msg: `Sign up error: ${err.message}` },
+      });
+    });
+}
+
+
 export function logout(dispatch) {
   dispatch({
     type: 'LOGOUT',
