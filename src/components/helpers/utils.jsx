@@ -50,4 +50,8 @@ export function sortCommentsByDate(a, b) {
   return (0);
 }
 
+export function isMobileDevice() {
+  return (typeof window.orientation !== 'undefined') || (navigator.userAgent.indexOf('IEMobile') !== -1);
+}
+
 /* eslint-enable import/prefer-default-export */

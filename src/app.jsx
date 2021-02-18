@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom/';
 import Drawer from './components/drawer';
 import SearchScreen from './components/search-screen';
+import StatisticsScreen from './components/statistics-screen';
 import ResultsScreen from './components/results-screen';
 import AppBar from './components/app-bar';
 import LoginForm from './components/login-form';
@@ -29,6 +30,12 @@ function App() {
           path="/"
         >
           <SearchScreen setFormOpen={setLoginFormOpen} />
+        </Route>
+        <Route
+          exact
+          path="/statistics"
+        >
+          <StatisticsScreen setFormOpen={setLoginFormOpen} />
         </Route>
         <Route
           path="/results/:searchId/:pag?"

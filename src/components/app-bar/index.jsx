@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import AssessmentIcon from '@material-ui/icons/Assessment';
 import { useLocation } from 'react-router-dom';
 import Store from '../../reducers/store';
 import useStyles from './useStyles';
@@ -39,8 +40,28 @@ export default function MyAppBar(props) {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" className={classes.title}>
-          Youtube Comments
+          Youtube Tools
         </Typography>
+        <IconButton
+          title="Get Channel Statistics"
+          aria-label="statistics"
+          className={classes.search}
+          href="/statistics"
+        >
+          <AssessmentIcon />
+        </IconButton>
+        {
+          location.pathname !== '/' && (
+            <IconButton
+              title="Go homepage"
+              aria-label="home"
+              className={classes.search}
+              href="/"
+            >
+              <SearchIcon />
+            </IconButton>
+          )
+        }
         {
           userId
             ? <Avatar userId={userId} />
@@ -53,18 +74,6 @@ export default function MyAppBar(props) {
                 Login
               </Button>
             )
-        }
-        {
-          location.pathname !== '/' && (
-            <IconButton
-              title="Go homepage"
-              aria-label="home"
-              className={classes.search}
-              href="/"
-            >
-              <SearchIcon />
-            </IconButton>
-          )
         }
       </Toolbar>
     </AppBar>
