@@ -105,6 +105,7 @@ export default {
         process.env.REACT_APP_API_URL,
         '/api/channels/',
         `${channelId}`,
+        '/find-videos'
       ].join('');
       const opt = {
         method: 'GET',

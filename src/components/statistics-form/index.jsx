@@ -9,7 +9,7 @@ import Search from '@material-ui/icons/Search';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Store from '../../reducers/store';
 import useStyles from './useStyles';
-import { fetchComments } from '../../actions/comments-actions';
+import { fetchChannelStatistics } from '../../actions/channel-actions';
 import withIsMobile from '../../hocs/with-is-mobile';
 
 function StatisticsFrom(props) {
@@ -19,7 +19,7 @@ function StatisticsFrom(props) {
 
   const makeRequest = useCallback(() => {
     if (channelId) {
-      fetchComments(dispatch, { channelId, token: get(state, 'user.token') });
+      fetchChannelStatistics(dispatch, { channelId, token: get(state, 'user.token') });
       setChannelId('');
     }
   }, [state, dispatch, channelId]);

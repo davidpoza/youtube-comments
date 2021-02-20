@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import { useHistory } from 'react-router-dom';
 import AlertBar from '../alert-bar';
-import StatisticsFrom from '../statistics-form';
+import StatisticsForm from '../statistics-form';
+import StatisticsChart from '../statistics-chart';
 import Store from '../../reducers/store';
 import useStyles from './useStyles';
 
@@ -19,6 +20,7 @@ function StatisticsScreen(props) {
       dispatch({ type: 'CLEAN_LAST_SEARCH_ID' });
     }
   }, [state.lastSearchId, dispatch, history]);
+
   return (
     <Grid
       container
@@ -28,7 +30,8 @@ function StatisticsScreen(props) {
       style={{ minHeight: '100vh' }}
     >
       <Grid item xs={12} md={10} xl={10}>
-        <StatisticsFrom setFormOpen={setFormOpen} />
+        <StatisticsForm setFormOpen={setFormOpen} />
+        <StatisticsChart data={state.statisticsHistory} id={state.lastChannelSearchId} />
         <AlertBar msg={state.msg} error={state.error} />
       </Grid>
     </Grid>

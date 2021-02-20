@@ -1,5 +1,6 @@
 export default function reducer(state, action) {
   const newHistory = { ...state.history };
+  const newStatisticsHistory = { ...state.statisticsHistory };
   switch (action.type) {
     case 'SIGNUP_ATTEMPT':
       return {
@@ -39,6 +40,19 @@ export default function reducer(state, action) {
         ...state, history: newHistory, loading: false, lastSearchId: action.payload.id,
       };
     case 'GET_COMMENTS_FAIL':
+      return {
+        ...state, loading: false, error: true, msg: action.payload.msg,
+      };
+    case 'GET_CHANNEL_STATISTICS_ATTEMPT':
+      return {
+        ...state, loading: true, error: false, statisticsHistory: undefined, lastChannelSearchId: undefined,
+      };
+    case 'GET_CHANNEL_STATISTICS_SUCCESS':
+      newStatisticsHistory[action.payload.id] = [ ...action.payload.videos ];
+      return {
+        ...state, statisticsHistory: newStatisticsHistory, loading: false, lastChannelSearchId: action.payload.id,
+      };
+    case 'GET_CHANNEL_STATISTICS_FAIL':
       return {
         ...state, loading: false, error: true, msg: action.payload.msg,
       };
