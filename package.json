@@ -22,8 +22,7 @@
     "react-linkify": "^1.0.0-alpha",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "uuid": "^8.0.0",
-    "yt-channel-info": "github:davidpoza/yt-channel-info#master"
+    "uuid": "^8.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
