@@ -17,13 +17,15 @@ export default makeStyles((theme) => ({
     border: '1px solid grey',
     borderRadius: '4px',
     backgroundColor: 'rgba(255,255,255,0.8)',
+    width: '336px',
+    marginBottom: '-320px',
     padding: '5px',
     '& > span': {
       fontSize: '1.1em',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
     },
     '& > .viewsCount': {
       textAlign: 'right',
-    }
-  }
+    },
+  },
 }));

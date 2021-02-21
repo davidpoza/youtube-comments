@@ -48,7 +48,7 @@ export default function reducer(state, action) {
         ...state, loading: true, error: false, statisticsHistory: undefined, lastChannelSearchId: undefined,
       };
     case 'GET_CHANNEL_STATISTICS_SUCCESS':
-      newStatisticsHistory[action.payload.id] = [ ...action.payload.videos ];
+      newStatisticsHistory[action.payload.id] = action.payload;
       return {
         ...state, statisticsHistory: newStatisticsHistory, loading: false, lastChannelSearchId: action.payload.id,
       };

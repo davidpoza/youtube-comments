@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
 import moment from 'moment';
+
+// own
+import ChannelInfo from '../channel-info';
 import useStyles from './useStyles';
 
 export default function VideoInfo(props) {
@@ -22,17 +24,12 @@ export default function VideoInfo(props) {
           {formatedDate}
         </Typography>
       </div>
-      <div className={classes.channelInfo}>
-        <Avatar className="avatar" src={userImage} />
-        <div>
-          <Typography className="channelName" variant="h1" component="a" href={userLink}>
-            {userName}
-          </Typography>
-          <Typography className="subsCount" variant="subtitle1">
-            {`${userSubsCount} subscribers`}
-          </Typography>
-        </div>
-      </div>
+      <ChannelInfo
+        userImage={userImage}
+        userName={userName}
+        userLink={userLink}
+        userSubsCount={userSubsCount}
+      />
     </>
   );
 }

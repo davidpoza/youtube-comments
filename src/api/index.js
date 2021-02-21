@@ -105,7 +105,23 @@ export default {
         process.env.REACT_APP_API_URL,
         '/api/channels/',
         `${channelId}`,
-        '/find-videos'
+      ].join('');
+      const opt = {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      return (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve(mockListChannels) : fetch(q, opt));
+    },
+    findVideos(channelId, token) {
+      const q = [
+        process.env.REACT_APP_API_URL,
+        '/api/channels/',
+        `${channelId}`,
+        '/find-videos',
       ].join('');
       const opt = {
         method: 'GET',
