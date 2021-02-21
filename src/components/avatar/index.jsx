@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Avatar from '@material-ui/core/Avatar';
+import Link from '@material-ui/core/Link';
+
+// own
 import useStyles from './useStyles';
 import Store from '../../reducers/store';
 import { logout } from '../../actions/user-actions';
@@ -35,14 +38,17 @@ export default function MyAvatar(props) {
           src={`${process.env.REACT_APP_API_URL}/api/users/avatar/${userId}`}
         />
         <Menu
+          className={classes.menu}
           id="simple-menu"
           anchorEl={anchorEl}
           keepMounted
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem className={classes.menuEmail} disabled>{state.user.email}</MenuItem>
-          <MenuItem onClick={handleLogout}>Logout</MenuItem>
+          <MenuItem disabled className={classes.menuEmail}>{state.user.email}</MenuItem>
+          <MenuItem component={Link} href="/" style={{ textDecoration: 'none' }}>Comments Search</MenuItem>
+          <MenuItem component={Link} href="/statistics" style={{ textDecoration: 'none' }}>Get channel statistics</MenuItem>
+          <MenuItem onClick={handleLogout} style={{ textDecoration: 'none' }}>Logout</MenuItem>
         </Menu>
       </>
     );

@@ -15,6 +15,7 @@ export default makeStyles((theme) => ({
   channelInfo: {
     display: 'flex',
     height: 80,
+    margin: '1em',
     alignItems: 'center',
     '& > .avatar': {
       width: theme.spacing(7),

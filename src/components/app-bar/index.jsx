@@ -7,9 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import AssessmentIcon from '@material-ui/icons/Assessment';
-import { useLocation } from 'react-router-dom';
 import Store from '../../reducers/store';
 import useStyles from './useStyles';
 import Avatar from '../avatar';
@@ -18,7 +15,6 @@ export default function MyAppBar(props) {
   const [state, dispatch] = useContext(Store);
   const userId = get(state, 'user.id');
   const { drawerIsOpen, setDrawerOpen, setLoginFormOpen } = props;
-  const location = useLocation();
   const toggleDrawer = useCallback(() => {
     setDrawerOpen(!drawerIsOpen);
   }, [drawerIsOpen, setDrawerOpen]);
@@ -42,26 +38,6 @@ export default function MyAppBar(props) {
         <Typography variant="h6" className={classes.title}>
           Youtube Tools
         </Typography>
-        <IconButton
-          title="Get Channel Statistics"
-          aria-label="statistics"
-          className={classes.search}
-          href="/statistics"
-        >
-          <AssessmentIcon />
-        </IconButton>
-        {
-          location.pathname !== '/' && (
-            <IconButton
-              title="Go homepage"
-              aria-label="home"
-              className={classes.search}
-              href="/"
-            >
-              <SearchIcon />
-            </IconButton>
-          )
-        }
         {
           userId
             ? <Avatar userId={userId} />
