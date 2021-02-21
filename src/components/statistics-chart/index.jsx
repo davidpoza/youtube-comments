@@ -1,6 +1,9 @@
 import React, { useState, useContext, useCallback } from 'react';
 import { ResponsiveLine } from '@nivo/line';
 import PropTypes from 'prop-types';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 // own
 import useStyles from './useStyles';
@@ -23,17 +26,22 @@ function StatisticsChart({
   data, id, isMobile,
 }) {
   const classes = useStyles();
+  const [ratioView, setRatioView] = React.useState(false);
 
-  const formatData = (data) => {
+  const formatData = (data, ratioView) => {
     return data.map((value, index) => ({
       x: index + 1,
-      y: value.ageViewsRatio,
+      y: ratioView ? value.ageViewsRatio : value.viewCount,
       viewCount: value.viewCount,
       age: value.age,
       title: value.title,
       link: `https://youtube.com/watch?v=${value.id}`,
       thumbnail: value.thumbnail,
     }));
+  };
+
+  const handleSwitchChange = (event) => {
+    setRatioView(event.target.checked);
   };
 
   if (!id || !data) return null;
@@ -61,8 +69,8 @@ function StatisticsChart({
         }}
         data={[
           {
-            id: 'ratio views count / age',
-            data: formatData(data),
+            id: ratioView ? 'ratio views count / age' : 'views count',
+            data: formatData(data, ratioView),
           },
         ]}
         xScale={{
@@ -76,7 +84,7 @@ function StatisticsChart({
         axisRight={null}
         axisLeft={{
           legendOffset: 13,
-          legend: 'age/views ratio',
+          legend: ratioView ? 'age/views ratio' : 'views count',
         }}
         axisBottom={{
           legend: 'videos',
@@ -92,6 +100,12 @@ function StatisticsChart({
           }
         }}
       />
+      <FormGroup row>
+        <FormControlLabel
+          control={<Switch checked={ratioView} onChange={handleSwitchChange} name="ratioView" />}
+          label="Enable ratio view"
+        />
+      </FormGroup>
     </div>
   );
 }

@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import get from 'lodash.get';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import Icon from '@material-ui/core/Icon';
 import Search from '@material-ui/icons/Search';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Store from '../../reducers/store';
