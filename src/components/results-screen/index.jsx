@@ -20,7 +20,6 @@ function ResultsScreen() {
   const pagInt = pag ? parseInt(pag, 10) : 1;
   const [state, dispatch] = useContext(Store);
   const search = state.history[searchId];
-  console.log(search)
 
   if (search) {
     return (

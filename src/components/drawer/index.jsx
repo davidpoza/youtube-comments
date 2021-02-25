@@ -57,7 +57,7 @@ export default function Drawer(props) {
   const [type, setType] = useState('comments');
 
   useEffect(() => {
-    if (window.location.href.endsWith('statistics')) {
+    if (window.location.href.includes('/statistics')) {
       setType('statistics');
     }
   }, []);
