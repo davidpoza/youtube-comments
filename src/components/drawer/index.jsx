@@ -1,4 +1,4 @@
-import React, { useContext, useCallback, useState } from 'react';
+import React, { useContext, useCallback, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import get from 'lodash.get';
@@ -55,6 +55,13 @@ export default function Drawer(props) {
   const classes = useStyles();
   const [state, dispatch] = useContext(Store);
   const [type, setType] = useState('comments');
+
+  useEffect(() => {
+    if (window.location.href.endsWith('statistics')) {
+      setType('statistics');
+    }
+  }, []);
+
   const toggleDrawer = useCallback(() => {
     setDrawerOpen(!drawerIsOpen);
   }, [setDrawerOpen, drawerIsOpen]);

@@ -33,7 +33,7 @@ function App() {
         </Route>
         <Route
           exact
-          path="/statistics"
+          path="/statistics/:searchId?"
         >
           <StatisticsScreen setFormOpen={setLoginFormOpen} />
         </Route>

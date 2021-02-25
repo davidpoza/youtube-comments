@@ -30,5 +30,5 @@ VideoInfo.propTypes = {
   userImage: PropTypes.string, // channel image url
   userLink: PropTypes.string, // channel link
   userName: PropTypes.string, // channel name
-  userSubsCount: PropTypes.string, // channel subscribers
+  userSubsCount: PropTypes.number, // channel subscribers
 };

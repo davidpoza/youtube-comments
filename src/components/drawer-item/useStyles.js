@@ -8,6 +8,7 @@ export default makeStyles({
     fontSize: '0.7em',
     textDecoration: 'none',
     fontWeight: 400,
+    cursor: 'pointer',
   },
   date: {
     fontSize: '0.6em',

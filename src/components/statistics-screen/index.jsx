@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
-import { useHistory } from 'react-router-dom';
 
 // own
 import AlertBar from '../alert-bar';
@@ -14,15 +14,9 @@ import useStyles from './useStyles';
 
 function StatisticsScreen(props) {
   const { setFormOpen } = props;
+  const { searchId } = useParams();
   const [state, dispatch] = useContext(Store);
   const classes = useStyles();
-  const history = useHistory();
-  // useEffect(() => {
-  //   if (state.lastSearchId) {
-  //     history.push(`/results/${state.lastSearchId}`);
-  //     dispatch({ type: 'CLEAN_LAST_SEARCH_ID' });
-  //   }
-  // }, [state.lastSearchId, dispatch, history]);
 
   return (
     <Grid
@@ -35,18 +29,18 @@ function StatisticsScreen(props) {
       <Grid item xs={12} md={10} xl={10}>
         <StatisticsForm setFormOpen={setFormOpen} />
         {
-          state.statisticsHistory && state.statisticsHistory.length > 0 && state.lastChannelSearchId
+          state.statisticsHistory && (searchId || state.lastChannelSearchId)
             && (
               <>
                 <ChannelInfo
-                  userImage={state.statisticsHistory[state.lastChannelSearchId].thumbnailUrl}
-                  userName={state.statisticsHistory[state.lastChannelSearchId].title}
-                  userLink={state.statisticsHistory[state.lastChannelSearchId].url}
-                  userSubsCount={state.statisticsHistory[state.lastChannelSearchId].subscriberCount}
+                  userImage={state.statisticsHistory[searchId || state.lastChannelSearchId].thumbnailUrl}
+                  userName={state.statisticsHistory[searchId || state.lastChannelSearchId].title}
+                  userLink={state.statisticsHistory[searchId || state.lastChannelSearchId].url}
+                  userSubsCount={state.statisticsHistory[searchId || state.lastChannelSearchId].subscriberCount}
                 />
                 <StatisticsChart
-                  data={state.statisticsHistory[state.lastChannelSearchId].videos}
-                  id={state.lastChannelSearchId}
+                  data={state.statisticsHistory[searchId || state.lastChannelSearchId].videos}
+                  id={searchId || state.lastChannelSearchId}
                 />
               </>
             )

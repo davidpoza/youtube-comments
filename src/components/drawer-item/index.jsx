@@ -17,14 +17,11 @@ export default function DrawerItem(props) {
   const {
     id,
     date,
-    imageHeight,
     imageUrl,
-    imageWidth,
     keywords,
     title,
     userLink,
     userName,
-    videoId,
     avatarLink,
     counter,
     type = 'comments',
@@ -43,7 +40,7 @@ export default function DrawerItem(props) {
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
           <a href={avatarLink}>
-            <Avatar variant={type === 'comments' ? 'square' : 'circle'} src={imageUrl} />
+            <Avatar variant={type === 'comments' ? 'square' : 'circular'} src={imageUrl} />
           </a>
         </ListItemAvatar>
         <ListItemText
@@ -60,7 +57,7 @@ export default function DrawerItem(props) {
                 className={classes.title}
                 color="textPrimary"
                 component="a"
-                href={`/results/${id}`}
+                href={type === 'comments' ? `/results/${id}` : `/statistics/${id}`}
               >
                 {title}
               </Typography>
@@ -106,14 +103,11 @@ DrawerItem.propTypes = {
   counter: PropTypes.number,
   date: PropTypes.string,
   id: PropTypes.string,
-  imageHeight: PropTypes.number,
   imageUrl: PropTypes.string,
-  imageWidth: PropTypes.number,
   keywords: PropTypes.string,
   title: PropTypes.string,
   userLink: PropTypes.string,
   userName: PropTypes.string,
-  videoId: PropTypes.string,
-  videoLink: PropTypes.string,
+  avatarLink: PropTypes.string,
   type: PropTypes.string,
 };
