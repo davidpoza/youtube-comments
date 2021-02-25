@@ -1,11 +1,12 @@
-import React, { useContext, useCallback } from 'react';
+import React, { useContext, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import get from 'lodash.get';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import List from '@material-ui/core/List';
-import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
 import Store from '../../reducers/store';
 import useStyles from './useStyles';
@@ -23,34 +24,61 @@ function sortByDate(a, b) {
   return (0);
 }
 
+function SimpleMenu({ selectedOption, setType }) {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const classes = useStyles();
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  return (
+    <div className={classes.menuButton}>
+      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+        {selectedOption}
+      </Button>
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={() => { setAnchorEl(null); }}
+      >
+        <MenuItem onClick={() => { setType('statistics'); setAnchorEl(null); }}>Statistic history</MenuItem>
+        <MenuItem onClick={() => { setType('comments'); setAnchorEl(null); }}>Comments search history</MenuItem>
+      </Menu>
+    </div>
+  );
+}
+
 export default function Drawer(props) {
   const { drawerIsOpen, setDrawerOpen } = props;
   const classes = useStyles();
   const [state, dispatch] = useContext(Store);
-
+  const [type, setType] = useState('comments');
   const toggleDrawer = useCallback(() => {
     setDrawerOpen(!drawerIsOpen);
   }, [setDrawerOpen, drawerIsOpen]);
-
+  const items = type === 'comments' ? state.history : state.statisticsHistory;
   const list = () => (
     <List className={classes.list}>
       {
-        Object.keys(state.history)
-          .map((id) => (state.history[id]))
+        items && Object.keys(items)
+          .map((id) => (type === 'comments' ? state.history[id] : state.statisticsHistory[id]))
           .sort(sortByDate)
           .map((obj) => (
             <DrawerItem
-              commentCount={get(obj, 'comments', []).length}
+              type={type}
+              counter={get(obj, type === 'comments' ? 'comments' : 'videos', []).length}
               date={get(obj, 'date')}
               id={get(obj, 'id')}
-              imageUrl={get(obj, 'imageLink')}
+              imageUrl={type === 'comments' ? get(obj, 'imageLink') : get(obj, 'thumbnailUrl')}
               key={get(obj, 'id')}
               keywords={get(obj, 'keywords')}
-              title={get(obj, 'videoTitle')}
-              userLink={get(obj, 'userLink')}
+              title={type === 'comments' ? get(obj, 'videoTitle') : get(obj, 'title')}
+              userLink={type === 'comments' ? get(obj, 'userLink') : get(obj, 'url')}
               userName={get(obj, 'userName')}
               videoId={get(obj, 'videoId')}
-              videoLink={`https://www.youtube.com/watch?v=${get(obj, 'videoId')}`}
+              avatarLink={type === 'comments' ? `https://www.youtube.com/watch?v=${get(obj, 'videoId')}` : get(obj, 'url')}
             />
           ))
       }
@@ -66,8 +94,9 @@ export default function Drawer(props) {
         onOpen={toggleDrawer}
       >
         <Typography className={classes.title} variant="h6" component="h2">
-          Search history
+          History
         </Typography>
+        <SimpleMenu selectedOption={type} setType={setType} />
         {list()}
       </SwipeableDrawer>
     </div>

@@ -87,7 +87,7 @@ export function cleanAlertBar(dispatch) {
 
 export function removeSearch(dispatch, { searchId }) {
   dispatch({
-    type: 'REMOVE_SEARCH',
+    type: 'REMOVE_COMMENTS_SEARCH',
     payload: { id: searchId },
   });
 }

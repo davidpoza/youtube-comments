@@ -11,4 +11,7 @@ export default makeStyles({
     textAlign: 'center',
     backgroundColor: '#f1f0f0',
   },
+  menuButton: {
+    textAlign: 'center',
+  },
 });

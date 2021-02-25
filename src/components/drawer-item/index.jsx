@@ -10,7 +10,9 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Icon from '@material-ui/core/Icon';
 import useStyles from './useStyles';
 import Store from '../../reducers/store';
-import { removeSearch } from '../../actions/comments-actions';
+import { removeSearch as removeCommentsSearch } from '../../actions/comments-actions';
+import { removeSearch as removeStatisticsSearch } from '../../actions/channel-actions';
+
 export default function DrawerItem(props) {
   const {
     id,
@@ -23,20 +25,25 @@ export default function DrawerItem(props) {
     userLink,
     userName,
     videoId,
-    videoLink,
-    commentCount,
+    avatarLink,
+    counter,
+    type = 'comments',
   } = props;
   const classes = useStyles();
   const [state, dispatch] = useContext(Store);
   const remove = useCallback(() => {
-    removeSearch(dispatch, { searchId: id });
+    if (type === 'comments') {
+      removeCommentsSearch(dispatch, { searchId: id });
+    } else {
+      removeStatisticsSearch(dispatch, { searchId: id });
+    }
   }, [dispatch, id]);
   return (
     <>
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
-          <a href={videoLink}>
-            <Avatar variant="square" src={imageUrl} />
+          <a href={avatarLink}>
+            <Avatar variant={type === 'comments' ? 'square' : 'circle'} src={imageUrl} />
           </a>
         </ListItemAvatar>
         <ListItemText
@@ -83,7 +90,8 @@ export default function DrawerItem(props) {
                 color="textPrimary"
                 component="span"
               >
-                {`${keywords} | ${commentCount} comments`}
+                { type === 'comments' && `keywords: ${keywords} | ` }
+                {`${counter} ${type === 'comments' ? 'comments' : 'videos'}`}
               </Typography>
             </>
           )}
@@ -95,7 +103,7 @@ export default function DrawerItem(props) {
 }
 
 DrawerItem.propTypes = {
-  commentCount: PropTypes.number,
+  counter: PropTypes.number,
   date: PropTypes.string,
   id: PropTypes.string,
   imageHeight: PropTypes.number,
@@ -107,4 +115,5 @@ DrawerItem.propTypes = {
   userName: PropTypes.string,
   videoId: PropTypes.string,
   videoLink: PropTypes.string,
+  type: PropTypes.string,
 };

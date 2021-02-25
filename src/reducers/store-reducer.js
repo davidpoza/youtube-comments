@@ -64,12 +64,19 @@ export default function reducer(state, action) {
       return {
         ...state, lastSearchId: undefined,
       };
-    case 'REMOVE_SEARCH':
+    case 'REMOVE_COMMENTS_SEARCH':
       if (newHistory[action.payload.id]) {
         delete newHistory[action.payload.id];
       }
       return {
         ...state, history: newHistory,
+      };
+    case 'REMOVE_STATISTICS_SEARCH':
+      if (newStatisticsHistory[action.payload.id]) {
+        delete newStatisticsHistory[action.payload.id];
+      }
+      return {
+        ...state, statisticsHistory: newStatisticsHistory,
       };
     default:
       return state;

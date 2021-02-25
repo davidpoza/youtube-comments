@@ -40,7 +40,7 @@ export function fetchChannelStatistics(dispatch, { channelId, token }) {
 
 export function removeSearch(dispatch, { searchId }) {
   dispatch({
-    type: 'REMOVE_SEARCH',
+    type: 'REMOVE_STATISTICS_SEARCH',
     payload: { id: searchId },
   });
 }

@@ -35,7 +35,7 @@ function StatisticsScreen(props) {
       <Grid item xs={12} md={10} xl={10}>
         <StatisticsForm setFormOpen={setFormOpen} />
         {
-          state.lastChannelSearchId
+          state.statisticsHistory && state.statisticsHistory.length > 0 && state.lastChannelSearchId
             && (
               <>
                 <ChannelInfo
