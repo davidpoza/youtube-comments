@@ -10,7 +10,7 @@ const initialState = {
   lastChannelSearchId: undefined,
   user: undefined, // Object from user entity /models/user.js
   history: {}, // object with search entities (/models/search.js)
-  statisticsHistory: {} // object with statistics entities (/models/statistic.js)
+  statisticsHistory: {}, // object with statistics entities (/models/statistic.js)
 };
 
 const Store = createContext();

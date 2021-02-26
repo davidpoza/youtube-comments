@@ -1,6 +1,7 @@
 export default function reducer(state, action) {
   const newHistory = { ...state.history };
   const newStatisticsHistory = { ...state.statisticsHistory };
+  console.log(action.type, "antes-->", newStatisticsHistory)
   switch (action.type) {
     case 'SIGNUP_ATTEMPT':
       return {
@@ -45,7 +46,7 @@ export default function reducer(state, action) {
       };
     case 'GET_CHANNEL_STATISTICS_ATTEMPT':
       return {
-        ...state, loading: true, error: false, statisticsHistory: undefined, lastChannelSearchId: undefined,
+        ...state, loading: true, error: false, lastChannelSearchId: undefined,
       };
     case 'GET_CHANNEL_STATISTICS_SUCCESS':
       newStatisticsHistory[action.payload.id] = action.payload;
