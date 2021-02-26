@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom/';
 import Drawer from './components/drawer';
 import SearchScreen from './components/search-screen';
 import StatisticsScreen from './components/statistics-screen';
+import RelatedScreen from './components/related-screen';
 import ResultsScreen from './components/results-screen';
 import AppBar from './components/app-bar';
 import LoginForm from './components/login-form';
@@ -36,6 +37,12 @@ function App() {
           path="/statistics/:searchId?"
         >
           <StatisticsScreen setFormOpen={setLoginFormOpen} />
+        </Route>
+        <Route
+          exact
+          path="/related-channels/:searchId?"
+        >
+          <RelatedScreen setFormOpen={setLoginFormOpen} />
         </Route>
         <Route
           path="/results/:searchId/:pag?"

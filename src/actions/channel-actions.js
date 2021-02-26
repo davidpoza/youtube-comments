@@ -38,6 +38,37 @@ export function fetchChannelStatistics(dispatch, { channelId, token }) {
     });
 }
 
+export function fetchRelatedChannels(dispatch, { channelId, token }) {
+  dispatch({
+    type: 'GET_CHANNEL_RELATED_ATTEMPT',
+  });
+  api.channels.findRelatedChannels(channelId, token)
+    .then((res) => (process.env.REACT_APP_DEBUG === 'true' ? Promise.resolve(res) : res.json()))
+    .then((data) => {
+      if (data) {
+        dispatch({
+          type: 'GET_CHANNEL_RELATED_SUCCESS',
+          payload: data,
+        });
+      } else {
+        return Promise.reject(new Error('Channel does not exist'));
+      }
+    })
+    .catch((err) => {
+      dispatch({
+        type: 'GET_CHANNEL_RELATED_FAIL',
+        payload: { msg: `Error fetching: ${err.message}` },
+      });
+    });
+}
+
+export function removeRelatedSearch(dispatch, { searchId }) {
+  dispatch({
+    type: 'REMOVE_RELATED_SEARCH',
+    payload: { id: searchId },
+  });
+}
+
 export function removeSearch(dispatch, { searchId }) {
   dispatch({
     type: 'REMOVE_STATISTICS_SEARCH',

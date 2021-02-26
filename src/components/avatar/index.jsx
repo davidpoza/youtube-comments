@@ -48,6 +48,7 @@ export default function MyAvatar(props) {
           <MenuItem disabled className={classes.menuEmail}>{state.user.email}</MenuItem>
           <MenuItem component={Link} href="/" style={{ textDecoration: 'none' }}>Comments Search</MenuItem>
           <MenuItem component={Link} href="/statistics" style={{ textDecoration: 'none' }}>Get channel statistics</MenuItem>
+          <MenuItem component={Link} href="/related-channels" style={{ textDecoration: 'none' }}>Find related channels</MenuItem>
           <MenuItem onClick={handleLogout} style={{ textDecoration: 'none' }}>Logout</MenuItem>
         </Menu>
       </>

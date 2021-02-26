@@ -1,7 +1,8 @@
 export default function reducer(state, action) {
   const newHistory = { ...state.history };
   const newStatisticsHistory = { ...state.statisticsHistory };
-  console.log(action.type, "antes-->", newStatisticsHistory)
+  const newRelatedHistory = { ...state.relatedHistory };
+
   switch (action.type) {
     case 'SIGNUP_ATTEMPT':
       return {
@@ -57,6 +58,19 @@ export default function reducer(state, action) {
       return {
         ...state, loading: false, error: true, msg: action.payload.msg,
       };
+    case 'GET_CHANNEL_RELATED_ATTEMPT':
+      return {
+        ...state, loading: true, error: false, lastRelatedSearchId: undefined,
+      };
+    case 'GET_CHANNEL_RELATED_SUCCESS':
+      newRelatedHistory[action.payload.id] = action.payload;
+      return {
+        ...state, relatedHistory: newRelatedHistory, loading: false, lastRelatedSearchId: action.payload.id,
+      };
+    case 'GET_CHANNEL_RELATED_FAIL':
+      return {
+        ...state, loading: false, error: true, msg: action.payload.msg,
+      };
     case 'CLEAN_ALERT_BAR':
       return {
         ...state, msg: '',
@@ -64,6 +78,13 @@ export default function reducer(state, action) {
     case 'CLEAN_LAST_SEARCH_ID':
       return {
         ...state, lastSearchId: undefined,
+      };
+    case 'REMOVE_RELATED_SEARCH':
+      if (newRelatedHistory[action.payload.id]) {
+        delete newRelatedHistory[action.payload.id];
+      }
+      return {
+        ...state, relatedHistory: newRelatedHistory,
       };
     case 'REMOVE_COMMENTS_SEARCH':
       if (newHistory[action.payload.id]) {
