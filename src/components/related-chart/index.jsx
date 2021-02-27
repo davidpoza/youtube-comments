@@ -1,25 +1,44 @@
 import React, { useState, useContext, useCallback } from 'react';
-import { ResponsiveLine } from '@nivo/line';
 import PropTypes from 'prop-types';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
+import { ResponsivePie } from '@nivo/pie'
 
 // own
 import useStyles from './useStyles';
 import withIsMobile from '../../hocs/with-is-mobile';
-
 
 function RelatedChart({
   data, id, isMobile,
 }) {
   const classes = useStyles();
 
+  const mytheme = {
+    tooltip: {
+      basic: { whiteSpace: 'pre', display: 'flex', alignItems: 'center' },
+      container: { fontFamily: 'Roboto, sans-serif', background: 'white', color: 'inherit', fontSize: 'inherit', borderRadius: '2px', boxShadow: '0 1px 2px rgba(0, 0, 0, 0.25)' },
+      table: {},
+      tableCell: { padding: '3px 5px'},
+    },
+    labels: {
+      text: { fill: '#333333', fontSize: 9, fontFamily: 'Roboto, sans-serif', color: '#999999' }
+    },
+  };
 
   if (!id || !data) return null;
   return (
     <div className={classes.root}>
-      gráfico tipo tarta con los canales relacionados
+      <ResponsivePie
+        data={data}
+        margin={{ top: 20, right: 40, bottom: 20, left: 40 }}
+        theme={mytheme}
+        onClick={(e) => {
+          if (!isMobile) {
+            window.open(
+              e.link,
+              '_blank', // <- This is what makes it open in a new window.
+            );
+          }
+        }}
+      />
     </div>
   );
 }
@@ -27,6 +46,10 @@ function RelatedChart({
 export default withIsMobile(RelatedChart);
 
 RelatedChart.propTypes = {
-  data: PropTypes.array,
+  data: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    label: PropTypes.string,
+    value: PropTypes.number,
+  })),
   id: PropTypes.string,
 };

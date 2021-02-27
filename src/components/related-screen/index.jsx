@@ -2,6 +2,9 @@ import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 // own
 import AlertBar from '../alert-bar';
@@ -15,8 +18,35 @@ function RelatedScreen(props) {
   const { setFormOpen } = props;
   const { searchId } = useParams();
   const [state, dispatch] = useContext(Store);
+  const [simplifiedView, setSimplifiedView] = React.useState(false);
   const classes = useStyles();
-console.log(state.relatedHistory)
+
+  /**
+   * Original data provided by API is an object because is more optimal to add hits refering channel by key.
+   * But Pie chart needs an array.
+   * @param {object} relatedChannels
+   * @return {array}
+   */
+  function transformData(relatedChannels) {
+    const res = [];
+    Object.keys(relatedChannels).forEach((channelName) => {
+      if (!simplifiedView  || (simplifiedView && relatedChannels[channelName].hits !== 1)) {
+        res.push({
+          id: channelName,
+          label: channelName,
+          value: relatedChannels[channelName].hits,
+          link: `https://youtube.com${relatedChannels[channelName].url}`,
+        });
+      }
+
+    });
+    return res;
+  }
+
+  const handleSwitchChange = (event) => {
+    setSimplifiedView(event.target.checked);
+  };
+
   return (
     <Grid
       container
@@ -38,9 +68,15 @@ console.log(state.relatedHistory)
                   userSubsCount={state.relatedHistory[searchId || state.lastRelatedSearchId].subscriberCount}
                 />
                 <RelatedChart
-                  data={state.relatedHistory[searchId || state.lastRelatedSearchId].relatedChannels}
+                  data={transformData(state.relatedHistory[searchId || state.lastRelatedSearchId].relatedChannels)}
                   id={searchId || state.lastRelatedSearchId}
                 />
+                <FormGroup row>
+                  <FormControlLabel
+                    control={<Switch checked={simplifiedView} onChange={handleSwitchChange} name="ratioView" />}
+                    label="Enable simplified view"
+                  />
+                </FormGroup>
               </>
             )
         }
