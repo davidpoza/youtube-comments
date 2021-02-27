@@ -11,7 +11,7 @@ import Icon from '@material-ui/core/Icon';
 import useStyles from './useStyles';
 import Store from '../../reducers/store';
 import { removeSearch as removeCommentsSearch } from '../../actions/comments-actions';
-import { removeSearch as removeStatisticsSearch } from '../../actions/channel-actions';
+import { removeSearch as removeStatisticsSearch, removeRelatedSearch } from '../../actions/channel-actions';
 
 export default function DrawerItem(props) {
   const {
@@ -28,13 +28,41 @@ export default function DrawerItem(props) {
   } = props;
   const classes = useStyles();
   const [state, dispatch] = useContext(Store);
+
   const remove = useCallback(() => {
     if (type === 'comments') {
       removeCommentsSearch(dispatch, { searchId: id });
-    } else {
+    } else if (type === 'videos') {
       removeStatisticsSearch(dispatch, { searchId: id });
+    } else if (type === 'channels') {
+      removeRelatedSearch(dispatch, { searchId: id });
     }
   }, [dispatch, id]);
+
+  function getLink(itemType, itemId) {
+    if (itemType === 'comments') {
+      return (`/results/${itemId}`);
+    }
+    if (itemType === 'videos') {
+      return (`/statistics/${itemId}`);
+    }
+    if (itemType === 'channels') {
+      return (`/related-channels/${itemId}`);
+    }
+  }
+
+  function getCounterItemType(itemType) {
+    if (itemType === 'comments') {
+      return ('comments');
+    }
+    if (itemType === 'videos') {
+      return ('videos');
+    }
+    if (itemType === 'channels') {
+      return ('channels');
+    }
+  }
+
   return (
     <>
       <ListItem alignItems="flex-start">
@@ -57,7 +85,7 @@ export default function DrawerItem(props) {
                 className={classes.title}
                 color="textPrimary"
                 component="a"
-                href={type === 'comments' ? `/results/${id}` : `/statistics/${id}`}
+                href={getLink(type, id)}
               >
                 {title}
               </Typography>
@@ -88,7 +116,7 @@ export default function DrawerItem(props) {
                 component="span"
               >
                 { type === 'comments' && `keywords: ${keywords} | ` }
-                {`${counter} ${type === 'comments' ? 'comments' : 'videos'}`}
+                {`${counter} ${getCounterItemType(type)}`}
               </Typography>
             </>
           )}

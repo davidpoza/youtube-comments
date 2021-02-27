@@ -1,11 +1,10 @@
-import React, { useContext, useCallback, useState, useEffect } from 'react';
+import React, {
+  useContext, useCallback, useState, useEffect,
+} from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import get from 'lodash.get';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Store from '../../reducers/store';
@@ -24,32 +23,6 @@ function sortByDate(a, b) {
   return (0);
 }
 
-function SimpleMenu({ selectedOption, setType }) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const classes = useStyles();
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  return (
-    <div className={classes.menuButton}>
-      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-        {selectedOption}
-      </Button>
-      <Menu
-        id="simple-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={() => { setAnchorEl(null); }}
-      >
-        <MenuItem onClick={() => { setType('statistics'); setAnchorEl(null); }}>Statistic history</MenuItem>
-        <MenuItem onClick={() => { setType('comments'); setAnchorEl(null); }}>Comments search history</MenuItem>
-      </Menu>
-    </div>
-  );
-}
-
 export default function Drawer(props) {
   const { drawerIsOpen, setDrawerOpen } = props;
   const classes = useStyles();
@@ -58,24 +31,52 @@ export default function Drawer(props) {
 
   useEffect(() => {
     if (window.location.href.includes('/statistics')) {
-      setType('statistics');
+      setType('videos');
+    } else if (window.location.href.includes('/related-channels')) {
+      setType('channels');
     }
   }, []);
+
+  function getItems(itemType) {
+    if (itemType === 'comments') {
+      return state.history;
+    }
+    if (itemType === 'videos') {
+      return state.statisticsHistory;
+    }
+    if (itemType === 'channels') {
+      return state.relatedHistory;
+    }
+    return ([]);
+  }
+
+  function getItemsLength(itemType, obj) {
+    if (itemType === 'comments') {
+      return obj.comments.length;
+    }
+    if (itemType === 'videos') {
+      return obj.videos.length;
+    }
+    if (itemType === 'channels') {
+      return Object.keys(obj.relatedChannels).length;
+    }
+    return ([]);
+  }
 
   const toggleDrawer = useCallback(() => {
     setDrawerOpen(!drawerIsOpen);
   }, [setDrawerOpen, drawerIsOpen]);
-  const items = type === 'comments' ? state.history : state.statisticsHistory;
+  const items = getItems(type);
   const list = () => (
     <List className={classes.list}>
       {
         items && Object.keys(items)
-          .map((id) => (type === 'comments' ? state.history[id] : state.statisticsHistory[id]))
+          .map((id) => (getItems(type)[id]))
           .sort(sortByDate)
           .map((obj) => (
             <DrawerItem
               type={type}
-              counter={get(obj, type === 'comments' ? 'comments' : 'videos', []).length}
+              counter={getItemsLength(type, obj)}
               date={get(obj, 'date')}
               id={get(obj, 'id')}
               imageUrl={type === 'comments' ? get(obj, 'imageLink') : get(obj, 'thumbnailUrl')}
@@ -103,7 +104,6 @@ export default function Drawer(props) {
         <Typography className={classes.title} variant="h6" component="h2">
           History
         </Typography>
-        <SimpleMenu selectedOption={type} setType={setType} />
         {list()}
       </SwipeableDrawer>
     </div>
