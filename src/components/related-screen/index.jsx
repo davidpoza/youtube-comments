@@ -30,7 +30,7 @@ function RelatedScreen(props) {
   function transformData(relatedChannels) {
     const res = [];
     Object.keys(relatedChannels).forEach((channelName) => {
-      if (!simplifiedView  || (simplifiedView && relatedChannels[channelName].hits !== 1)) {
+      if (!simplifiedView || (simplifiedView && relatedChannels[channelName].hits !== 1)) {
         res.push({
           id: channelName,
           label: channelName,

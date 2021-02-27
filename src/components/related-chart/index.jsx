@@ -1,4 +1,4 @@
-import React, { useState, useContext, useCallback } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { ResponsivePie } from '@nivo/pie'
 
@@ -14,9 +14,16 @@ function RelatedChart({
   const mytheme = {
     tooltip: {
       basic: { whiteSpace: 'pre', display: 'flex', alignItems: 'center' },
-      container: { fontFamily: 'Roboto, sans-serif', background: 'white', color: 'inherit', fontSize: 'inherit', borderRadius: '2px', boxShadow: '0 1px 2px rgba(0, 0, 0, 0.25)' },
+      container: {
+        fontFamily: 'Roboto, sans-serif',
+        background: 'white',
+        color: 'inherit',
+        fontSize: 'inherit',
+        borderRadius: '2px',
+        boxShadow: '0 1px 2px rgba(0, 0, 0, 0.25)',
+      },
       table: {},
-      tableCell: { padding: '3px 5px'},
+      tableCell: { padding: '3px 5px' },
     },
     labels: {
       text: { fill: '#333333', fontSize: 9, fontFamily: 'Roboto, sans-serif', color: '#999999' }
@@ -51,5 +58,6 @@ RelatedChart.propTypes = {
     label: PropTypes.string,
     value: PropTypes.number,
   })),
+  isMobile: PropTypes.bool,
   id: PropTypes.string,
 };
