@@ -58,7 +58,9 @@ function RelatedScreen(props) {
       <Grid item xs={12} md={10} xl={10}>
         <RelatedForm setFormOpen={setFormOpen} />
         {
-          state.relatedHistory && (searchId || state.lastRelatedSearchId)
+          state.relatedHistory &&
+          (searchId || state.lastRelatedSearchId) &&
+          state.relatedHistory[searchId || state.lastRelatedSearchId]
             && (
               <>
                 <ChannelInfo
